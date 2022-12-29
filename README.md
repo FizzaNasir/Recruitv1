@@ -10,7 +10,7 @@ The top level directory structure will be as follows:
 - <b>store</b> - Global Redux store
 - <b>utils</b> - Utilities, helpers, constants, and the like
 - <b>views</b> - Can also be called "pages", the majority of the app would be contained here
-- You can take more help from here : [Structure](https://www.taniarascia.com/react-architecture-directory-structure/)
+#### You can take more help from here for details: [Structure](https://www.taniarascia.com/react-architecture-directory-structure/)
 
 ### Backend Structure
 - To Be defined. (Pending yet)
