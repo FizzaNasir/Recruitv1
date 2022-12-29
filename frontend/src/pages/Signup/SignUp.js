@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import styles from './styles.module.css'
+import styles from './SignUp.module.css'
 
 const Signup = () => {
   const [data, setData] = useState({
