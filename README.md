@@ -9,7 +9,7 @@ The top level directory structure will be as follows:
 - <b>services</b> - JavaScript modules
 - <b>store</b> - Global Redux store
 - <b>utils</b> - Utilities, helpers, constants, and the like
-- <b>views</b> - Can also be called "pages", the majority of the app would be contained here
+- <b>pages</b> - the majority of the app would be contained here
 #### You can take more help from here for details: [Structure](https://www.taniarascia.com/react-architecture-directory-structure/)
 
 ### Backend Structure
@@ -17,4 +17,4 @@ We are followin a MVC Architecture for developing the backend.
 - <b>Models</b> : For Business logic
 - <b>Controllers</b> : For Application Logic
 - <b>Router</b> : User Request Handler.
-- <b>util</b> : Utilities, and helper
+- <b>utils</b> : Utilities, and helper
