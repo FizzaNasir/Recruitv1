@@ -1,3 +1,3 @@
-# Natours Application
+# Recruuit
 
-Built using modern technologies: node.js, express, mongoDB, mongoose and friends 😁
+Million Making Startup xD 😁
