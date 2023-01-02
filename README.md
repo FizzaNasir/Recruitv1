@@ -13,7 +13,7 @@ The top level directory structure will be as follows:
 #### You can take more help from here for details: [Structure](https://www.taniarascia.com/react-architecture-directory-structure/)
 
 ### Backend Structure
-- MVC Architecture. 
+We are followin a MVC Architecture for developing the backend. 
 - <b>Models</b> : For Business logic
 - <b>Controllers</b> : For Application Logic
 - <b>Router</b> : User Request Handler.
