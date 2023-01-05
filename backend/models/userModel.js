@@ -4,10 +4,6 @@ const validator = require('validator');
 const bcrypt = require('bcryptjs');
 
 const userSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: [true, 'Please tell us your name!']
-  },
   email: {
     type: String,
     required: [true, 'Please provide your email'],
@@ -31,4 +27,9 @@ const userSchema = new mongoose.Schema({
       }
     }
   },
+  twoWayAuth: {
+    type: Boolean,
+    default: false,
+    select: false
+  }
 });
