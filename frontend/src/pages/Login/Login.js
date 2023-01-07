@@ -49,6 +49,11 @@ const Login = () => {
                 Sign In
               </button>
             </form>
+            <Link to='/resetPwd'>
+              <button type='button' className={styles.white_btn}>
+                Forget password?
+              </button>
+            </Link>
           </div>
           <div className={styles.right}>
             <h1>New Here ?</h1>
