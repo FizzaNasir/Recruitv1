@@ -21,7 +21,6 @@ const Login = () => {
       localStorage.setItem('token', res.token)
       navigate('/dashboard')
     }
-
     setError('Invalid email or password')
   }
 
