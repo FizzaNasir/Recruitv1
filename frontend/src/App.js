@@ -1,11 +1,13 @@
 import { Route, Routes, Navigate } from 'react-router-dom'
-import Signup from './pages/Signup/SignUp'
-import Login from './pages/Login/Login'
-import ResetPwd from './pages/ResetPwd/reset'
-import SetPwd from './pages/ResetPwd/SetPwd'
-import Profile from './pages/Profile/Profile'
-import ErrorPage from './ErrorPage/ErrorPage'
-import DashBoard from './pages/DashBoard/DashBoard'
+import {
+  Signup,
+  Login,
+  ResetPwd,
+  SetPwd,
+  Profile,
+  ErrorPage,
+  DashBoard,
+} from './exports'
 function App() {
   return (
     <Routes>
