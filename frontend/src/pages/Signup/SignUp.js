@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import styles from './SignUp.module.css'
+import Header from '../../components/Header/Header'
 
+/
 const Signup = () => {
   const [data, setData] = useState({
     firstName: '',
@@ -23,9 +25,7 @@ const Signup = () => {
   return (
     <div>
       <div className={styles.main_container}>
-        <div className={styles.navbar}>
-          <h1>Recruuit</h1>
-        </div>
+        <Header />
       </div>
       <div className={styles.signup_container}>
         <div className={styles.signup_form_container}>

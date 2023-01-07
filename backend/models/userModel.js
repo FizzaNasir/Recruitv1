@@ -25,7 +25,13 @@ const userSchema = new mongoose.Schema({
       validator: function(el) {
         return el === this.password;
       }
-    }
+    },
+    select: false
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now(),
+    select: false
   },
   twoWayAuth: {
     type: Boolean,
@@ -33,3 +39,6 @@ const userSchema = new mongoose.Schema({
     select: false
   }
 });
+
+// Export the model
+module.exports = mongoose.model('User', userSchema);

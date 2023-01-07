@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import styles from './Login.module.css'
+import Header from '../../components/Header/Header'
 
 const Login = () => {
   const [data, setData] = useState({ email: '', password: '' })
@@ -17,9 +18,7 @@ const Login = () => {
   return (
     <div>
       <div className={styles.main_container}>
-        <div className={styles.navbar}>
-          <h1>Recruuit</h1>
-        </div>
+        <Header />
       </div>
       <div className={styles.login_container}>
         <div className={styles.login_form_container}>

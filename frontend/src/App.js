@@ -9,11 +9,10 @@ function App() {
     <Routes>
       <Route path='/signup' exact element={<Signup />} />
       <Route path='/login' exact element={<Login />} />
-      <Route path='/login' exact element={<Login />} />
       <Route path='/resetPwd' exact element={<ResetPwd />} />
       <Route path='/SetPwd' exact element={<SetPwd />} />
       <Route path='/profile' exact element={<Profile />} />
-      <Route path='/' exact element={<Navigate replace to='/login' />} />
+      <Route path='*' exact element={<Navigate replace to='/login' />} />
     </Routes>
   )
 }
