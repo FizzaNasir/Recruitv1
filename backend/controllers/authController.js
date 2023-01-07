@@ -20,6 +20,7 @@ exports.signUp = catchAsync(async (req, res, next) => {
     passwordConfirm: req.body.passwordConfirm
   });
 
+  console.log(req.body);
   const token = signToken(newUser._id);
 
   res.status(201).json({
@@ -42,7 +43,7 @@ exports.login = catchAsync(async (req, res, next) => {
   }
 
   // 3. Check if user exists && password is correct
-  const user = await User.findbyId({ email }).select('+password');
+  const user = await User.findOne({ email }).select('+password');
   // if not user or password is incorrect
   if (!user || !(await user.correctPassword(password, user.password))) {
     return next(new AppError('Incorrect email or password', 401));
@@ -54,3 +55,9 @@ exports.login = catchAsync(async (req, res, next) => {
     token
   });
 });
+
+// Forgot password
+exports.forgotPassword = catchAsync(async (req, res, next) => {});
+
+// Reset password
+exports.resetPassword = catchAsync(async (req, res, next) => {});

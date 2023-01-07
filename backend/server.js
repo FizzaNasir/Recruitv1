@@ -1,4 +1,3 @@
-const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
 process.on('uncaughtException', err => {
@@ -15,6 +14,7 @@ const connectDB = require('./dbConnection');
 // Connect to the database
 connectDB();
 
+console.log('first');
 const port = process.env.PORT || 3000;
 const server = app.listen(port, () => {
   console.log(`App running on port ${port}...`);
