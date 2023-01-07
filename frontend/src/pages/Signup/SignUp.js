@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import styles from './SignUp.module.css'
 import Header from '../../components/Header/Header'
-import axios from 'axios'
+import { signUp } from '../../util/api-call'
 
 const Signup = () => {
   const [data, setData] = useState({
@@ -23,28 +23,16 @@ const Signup = () => {
     // If the user is not created, display the error message
 
     e.preventDefault()
-    try {
-      const config = {
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-        },
-      }
-
-      const url = 'http://127.0.0.1:3020/recruuit/v1/users/signup'
-      const { data: res } = await axios.post(url, data, config)
-      navigate('/login')
-      console.log(res.data)
-    } catch (error) {
-      if (
-        error.response &&
-        error.response.status >= 400 &&
-        error.response.status <= 500
-      ) {
-        setError('Invalid email or Password not match')
-      }
+    const { email, password, passwordConfirm } = data
+    if (password !== passwordConfirm) {
+      setError('Passwords do not match')
+      return
     }
+    const res = await signUp({ email, password, passwordConfirm })
+    if (res) {
+      navigate('/login')
+    }
+    setError('Email already exists or server error')
   }
 
   return (

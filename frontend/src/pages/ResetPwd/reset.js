@@ -1,34 +1,29 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 // import { Link } from 'react-router-dom'
 import styles from './Login.module.css'
 import Header from '../../components/Header/Header'
+import { forgotPassword } from '../../util/api-call'
 
 const Reset = () => {
   const [email, setemail] = useState({ email: '' })
-  const [error, setError] = useState('')
+  const [message, setMessage] = useState('')
   const handleChange = ({ currentTarget: input }) => {
     setemail({ ...email, [input.name]: input.value })
   }
 
-  function handleSubmit(event) {
+  const handleSubmit = async (event) => {
     event.preventDefault()
-    var displaySetting = (document.getElementById('display_msg').innerHTML =
-      'We have sent a verification link to this email. Kindly check your inbox')
+    // let displaySetting = (document.getElementById('display_msg').innerHTML =
+    //   'We have sent a verification link to this email. Kindly check your inbox')
 
-    fetch('http://localhost:3000/forgot-password-api', {
-      method: 'POST',
-      crossDomain: true,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data, 'userregister')
-      })
+    const response = await forgotPassword(email)
+    if (response === 200) {
+      setMessage(
+        'We have sent a verification link to this email. Kindly check your inbox'
+      )
+    } else {
+      setMessage(response)
+    }
   }
 
   return (
@@ -50,12 +45,11 @@ const Reset = () => {
                 required
                 className={styles.input}
               />
-              {error && <div className={styles.error_msg}>{error}</div>}
               <button type='submit' className={styles.green_btn}>
                 Submit
               </button>
             </form>
-            <p id='display_msg'></p>
+            {message && <div className={styles.error_msg}>{message}</div>}
           </div>
         </div>
       </div>

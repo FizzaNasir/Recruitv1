@@ -5,6 +5,7 @@ const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const User = require('../models/userModel');
 const sendEmail = require('../utils/email');
+const { emailHtml } = require('../utils/emailHtml');
 // Sending JWT token and storing it in cookie
 const signToken = id => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -72,18 +73,16 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   const resetURL = `${req.protocol}://${req.get(
     'host'
   )}/recruuit/v1/users/resetPassword/${resetToken}`;
-  const txtMsg = `Forgot your password? Submit a PATCH request with your new password and passwordConfirm to: ${resetURL}.\nIf you didn't forget your password, please ignore this email!`;
-  const htmlMsg = `<h1>Forgot your password?</h1>
-    <p>Click <a href="${resetURL}">here</a> to reset your password.</p>
-    <p>If you didn't forget your password, please ignore this email!</p>`;
+  const message = `Forgot your password? Submit a PATCH request with your new password and passwordConfirm to: ${resetURL}.\nIf you didn't forget your password, please ignore this email!`;
+  const html = emailHtml(resetURL);
 
   // Send email
   try {
     await sendEmail({
       email: user.email,
       subject: 'Your password reset token (valid for 10 min)',
-      txtMsg,
-      htmlMsg
+      message,
+      html
     });
 
     res.status(200).json({
@@ -94,6 +93,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
     user.passwordResetToken = undefined;
     user.passwordResetExpires = undefined;
     await user.save({ validateBeforeSave: false });
+    console.log('Error: ', err);
 
     return next(
       new AppError('There was an error sending the email. Try again later!'),

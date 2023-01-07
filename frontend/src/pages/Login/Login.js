@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import styles from './Login.module.css'
-import axios from 'axios'
+import { login } from '../../util/api-call'
 import Header from '../../components/Header/Header'
 
 const Login = () => {
@@ -15,29 +15,14 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    try {
-      const config = {
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-        },
-      }
-
-      const url = 'http://localhost:3020/recruuit/v1/users/login'
-      const { data: res } = await axios.post(url, data, config)
+    const { email, password } = data
+    const res = await login({ email, password })
+    if (res) {
       localStorage.setItem('token', res.token)
-      localStorage.setItem('user', JSON.stringify(res.data))
       navigate('/dashboard')
-    } catch (error) {
-      if (
-        error.response &&
-        error.response.status >= 400 &&
-        error.response.status <= 500
-      ) {
-        setError(error.response.data.message)
-      }
     }
+
+    setError('Invalid email or password')
   }
 
   return (

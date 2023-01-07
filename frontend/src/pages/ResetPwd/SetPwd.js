@@ -13,22 +13,6 @@ const SetPwd = () => {
 
   function handleSubmit(event) {
     event.preventDefault()
-    const pwd = Password.password
-    console.log(pwd)
-    fetch('http://localhost:3000/forgot-password-api', {
-      method: 'POST',
-      crossDomain: true,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        Password,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data, 'password changed')
-      })
   }
 
   return (
