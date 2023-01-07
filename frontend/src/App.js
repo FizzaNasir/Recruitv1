@@ -4,6 +4,7 @@ import Login from './pages/Login/Login'
 import ResetPwd from './pages/ResetPwd/reset'
 import SetPwd from './pages/ResetPwd/SetPwd'
 import Profile from './pages/Profile/Profile'
+import ErrorPage from './ErrorPage/ErrorPage'
 function App() {
   return (
     <Routes>
@@ -12,7 +13,8 @@ function App() {
       <Route path='/resetPwd' exact element={<ResetPwd />} />
       <Route path='/SetPwd' exact element={<SetPwd />} />
       <Route path='/profile' exact element={<Profile />} />
-      <Route path='*' exact element={<Navigate replace to='/login' />} />
+      <Route path='/' exact element={<Navigate replace to='/login' />} />
+      <Route path='*' exact element={<ErrorPage />} />
     </Routes>
   )
 }

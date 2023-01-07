@@ -3,13 +3,11 @@ import { Link, useNavigate } from 'react-router-dom'
 import styles from './SignUp.module.css'
 import Header from '../../components/Header/Header'
 
-/
 const Signup = () => {
   const [data, setData] = useState({
-    firstName: '',
-    lastName: '',
     email: '',
     password: '',
+    passwordConfirm: '',
   })
   const [error, setError] = useState('')
   const navigate = useNavigate()
@@ -40,24 +38,7 @@ const Signup = () => {
           <div className={styles.right}>
             <form className={styles.form_container} onSubmit={handleSubmit}>
               <h1>Create Account</h1>
-              <input
-                type='text'
-                placeholder='First Name'
-                name='firstName'
-                onChange={handleChange}
-                value={data.firstName}
-                required
-                className={styles.input}
-              />
-              <input
-                type='text'
-                placeholder='Last Name'
-                name='lastName'
-                onChange={handleChange}
-                value={data.lastName}
-                required
-                className={styles.input}
-              />
+
               <input
                 type='email'
                 placeholder='Email'
@@ -70,6 +51,15 @@ const Signup = () => {
               <input
                 type='password'
                 placeholder='Password'
+                name='password'
+                onChange={handleChange}
+                value={data.password}
+                required
+                className={styles.input}
+              />
+              <input
+                type='password'
+                placeholder='Confirm Password'
                 name='password'
                 onChange={handleChange}
                 value={data.password}
