@@ -15,7 +15,7 @@ function App() {
       <Route path='/login' exact element={<Login />} />
       <Route path='/resetPwd' exact element={<ResetPwd />} />
       <Route path='/dashboard' exact element={<DashBoard />} />
-      <Route path='/SetPwd' exact element={<SetPwd />} />
+      <Route path='/resetPassword/:token' exact element={<SetPwd />} />
       <Route path='/profile' exact element={<Profile />} />
       <Route path='/' exact element={<Navigate replace to='/login' />} />
       <Route path='*' exact element={<ErrorPage />} />

@@ -48,3 +48,20 @@ export const forgotPassword = async (data) => {
     return err.response.data.message
   }
 }
+
+export const resetPassword = async (token, data) => {
+  const config = {
+    headers: Header,
+  }
+  try {
+    const res = await axios.patch(
+      `${url}users/resetPassword/${token}`,
+      data,
+      config
+    )
+    return 200
+  } catch (err) {
+    console.log(err)
+    return err.response.data.message
+  }
+}
