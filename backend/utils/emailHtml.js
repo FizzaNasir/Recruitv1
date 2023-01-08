@@ -1,3 +1,4 @@
+// This file contains the HTML for the email that is sent to the user when they request a password reset.
 exports.emailHtml = resetPasswordLink => {
   return `<!DOCTYPE html>
 <html>

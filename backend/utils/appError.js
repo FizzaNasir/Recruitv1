@@ -1,3 +1,4 @@
+// This is a custom error class that extends the built-in Error class in JavaScript. It is used to handle errors in a more elegant way.
 class AppError extends Error {
   constructor(message, statusCode) {
     super(message);

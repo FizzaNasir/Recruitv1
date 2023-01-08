@@ -13,15 +13,23 @@ const signToken = id => {
   });
 };
 
-// Signup
+/**
+ * @desc    Sign up
+ * @route   POST /recruuit/api/v1/signup
+ * @access  Public
+ * @role    User
+ *
+ * This function is used to create a new user
+ */
 exports.signUp = catchAsync(async (req, res, next) => {
+  // Create a new user in the database using the data from the request body
   const newUser = await User.create({
     email: req.body.email,
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm
   });
 
-  console.log(req.body);
+  // Sign the token and send it to the client
   const token = signToken(newUser._id);
 
   res.status(201).json({
@@ -33,10 +41,16 @@ exports.signUp = catchAsync(async (req, res, next) => {
   });
 });
 
-// Login
+/**
+ * @desc    Login
+ * @route   POST /recruuit/api/v1/login
+ * @access  Public
+ * @role    User
+ *
+ * This function is used to login a user and send a token to the client
+ */
 exports.login = catchAsync(async (req, res, next) => {
-  // Steps to login
-  // 1. Get email and password from request body
+  // 1. Get API data from request body
   const { email, password } = req.body;
   // 2. Check if email and password exist
   if (!email || !password) {
@@ -57,7 +71,13 @@ exports.login = catchAsync(async (req, res, next) => {
   });
 });
 
-// Forgot password
+/**
+ * @desc    forgot password
+ * @route   POST /recruuit/api/v1/forgotPassword
+ * @access  Public
+ *
+ * This function is used to send a reset password link to the user's email
+ */
 exports.forgotPassword = catchAsync(async (req, res, next) => {
   // 1. Get user based on POSTed email
   const user = await User.findOne({ email: req.body.email });
@@ -101,7 +121,14 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   }
 });
 
-// Reset password
+/**
+ * @desc    Reset password
+ * @route   POST /recruuit/api/v1/resetPassword/:token
+ * @access  Public
+ *
+ * This function is used to reset the password of the user using the reset password link
+ *
+ */
 exports.resetPassword = catchAsync(async (req, res, next) => {
   // 1. Get User based on the token
   const hashedToken = crypto
