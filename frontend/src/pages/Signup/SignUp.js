@@ -6,6 +6,7 @@ import { signUp } from '../../util/api-call'
 
 const Signup = () => {
   const [data, setData] = useState({
+    name: '',
     email: '',
     password: '',
     passwordConfirm: '',
@@ -23,16 +24,28 @@ const Signup = () => {
     // If the user is not created, display the error message
 
     e.preventDefault()
-    const { email, password, passwordConfirm } = data
+    const { name, email, password, passwordConfirm } = data
+    // check if email provided is valid
+    if (
+      !email ||
+      !name ||
+      !password ||
+      !passwordConfirm ||
+      !email.includes('@')
+    ) {
+      setError('Please fill all fields with valid email')
+      return
+    }
+
     if (password !== passwordConfirm) {
       setError('Passwords do not match')
       return
     }
-    const res = await signUp({ email, password, passwordConfirm })
-    if (res) {
+    const res = await signUp({ name, email, password, passwordConfirm })
+    if (res === 200) {
       navigate('/login')
     }
-    setError('Email already exists or server error')
+    setError('Email already exists or Server error')
   }
 
   return (
@@ -53,7 +66,15 @@ const Signup = () => {
           <div className={styles.right}>
             <form className={styles.form_container} onSubmit={handleSubmit}>
               <h1>Create Account</h1>
-
+              <input
+                type='name'
+                placeholder='Name'
+                name='name'
+                onChange={handleChange}
+                value={data.name}
+                required
+                className={styles.input}
+              />
               <input
                 type='email'
                 placeholder='Email'

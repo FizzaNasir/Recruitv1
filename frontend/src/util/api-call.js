@@ -15,10 +15,10 @@ export const signUp = async (data) => {
   console.log(data)
   try {
     const res = await axios.post(`${url}users/signup`, data, config)
-    return true
+    return 200
   } catch (err) {
     console.log(err)
-    return false
+    return err.response.data.message
   }
 }
 
