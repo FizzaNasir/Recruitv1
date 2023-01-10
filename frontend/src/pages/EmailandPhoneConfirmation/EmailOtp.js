@@ -1,5 +1,5 @@
 import InputField from '../../components/OTPInputField'
-import styles from './OtpScreen.module.css'
+import styles from './styles.module.css'
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import Header from '../../components/Header/Header'

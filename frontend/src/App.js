@@ -9,6 +9,7 @@ import {
   DashBoard,
   EmailOtp,
   PhoneNbrVerify,
+  ContactUs,
 } from './exports'
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
       <Route path='/resetPassword/:token' exact element={<SetPwd />} />
       <Route path='/verifyYourEmail' exact element={<EmailOtp />} />
       <Route path='/verifyYourPhoneNbr' exact element={<PhoneNbrVerify />} />
+      <Route path='/contactUs' exact element={<ContactUs />} />
 
       {/* for page after skiping */}
       {/* <Route path='/PhoneNbrVerify' exact element={<PhoneNbrVerify />} /> */}
