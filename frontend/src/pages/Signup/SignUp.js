@@ -43,7 +43,10 @@ const Signup = () => {
       return
     }
     const res = await signUp({ name, email, password, passwordConfirm })
-    if (res === 200) {
+    if (res?.status === 201) {
+      const otp = res.data.data.otp
+      localStorage.setItem('otp', otp)
+      localStorage.setItem('email', email)
       navigate('/verifyYourEmail')
     }
     setError('Email already exists or Server error')

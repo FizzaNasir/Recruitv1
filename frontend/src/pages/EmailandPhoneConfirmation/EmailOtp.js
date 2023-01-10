@@ -1,8 +1,11 @@
 import InputField from '../../components/OTPInputField'
 import styles from './OtpScreen.module.css'
 import { useState } from 'react'
-import { useEffect } from 'react'
+import { useNavigate } from 'react-router'
+import Header from '../../components/Header/Header'
+import { verifyEmail } from '../../util/api-call'
 
+// State for storing the otp digits
 const OtpScreen = () => {
   const [otpDigits, setotpDigits] = useState({
     Digit_1: '',
@@ -10,61 +13,55 @@ const OtpScreen = () => {
     Digit_3: '',
     Digit_4: '',
   })
-  const { Digit_1, Digit_2, Digit_3, Digit_4 } = otpDigits
 
+  const [error, setError] = useState('') // State for storing the error message
+  const navigate = useNavigate()
+
+  const { Digit_1, Digit_2, Digit_3, Digit_4 } = otpDigits // digits
+
+  // Handle change function for the input fields
   function handleChange(e) {
     const { name, value } = e.target
-
-    console.log(value)
-    console.log(name)
 
     setotpDigits((prevdata) => ({
       ...prevdata,
       [name]: value,
     }))
-    //splitting name with its sequence number to obtain the number
-    const [inputFieldName, inputFieldIndex] = name.split('_')
 
-    let inputFieldIntIndex = parseInt(inputFieldIndex, 10)
-
-    //if its not the last field
-    if (inputFieldIntIndex < 4) {
-      const nextfield = document.querySelector(
-        `input[name=Digit_${inputFieldIntIndex + 1}]`
-      )
-
-      //automatically focus on next field when done with prev one
-      nextfield.focus()
+    // move to next input field after checking condtions
+    if (e.target.dataset.next && value.length === 1) {
+      document.getElementById(e.target.dataset.next).focus()
     }
-    console.log(otpDigits)
   }
-  // just to check if state is updating correctly
-  // useEffect(() => {
-  //   console.log(otpDigits);
-  // }, [otpDigits]);
+
+  // function for handling the submit button
+  async function handleSubmit(e) {
+    e.preventDefault()
+    // if all the fields are filled then take otp from local storage
+    const otp = localStorage.getItem('otp')
+    // construct the otp from the state
+    const otpFromState = Digit_1 + Digit_2 + Digit_3 + Digit_4
+    // check if the otp from state is equal to the otp from local storage
+    if (otp === otpFromState) {
+      // if the otp is correct then update the DB & move to next page
+      const email = localStorage.getItem('email')
+      const data = { email, verifyEmail: true }
+      // make a post request to the server
+      await verifyEmail(data)
+      navigate('/verifyYourPhoneNbr')
+    } else {
+      setError('Incorrect OTP')
+    }
+  }
 
   return (
     <>
-      <div>
-        <div className={styles.main_container}>
-          <div className={styles.navbar}>
-            <h1>Recruuit</h1>
-          </div>
-        </div>
-      </div>
+      <Header />
       <div className={styles.centered}>
         <div className={styles.prompt}>
-          <h2>
-            Enter The Code Generated On Your Mobile Device Below To Log In!
-          </h2>
+          <>OTP has been sent to your email. Enter here for verification</>
         </div>
-        <form
-          method='Get'
-          className={styles.digitgroup}
-          data-group-name='Digits'
-          data-autosubmit='False'
-          autoComplete='Off'
-        >
+        <div className={styles.digitgroup}>
           <div>
             <InputField
               Value={Digit_1}
@@ -93,15 +90,19 @@ const OtpScreen = () => {
               Value={Digit_4}
               Id='Digit-4'
               Name='Digit_4'
-              DataNext='Digit-5'
               DataPrevious='Digit-3'
               handleChangestate={handleChange}
             />
           </div>
-          <button type='submit' className={styles.send_btn}>
+          <button
+            type='submit'
+            className={styles.send_btn}
+            onClick={handleSubmit}
+          >
             Send
           </button>
-        </form>
+        </div>
+        {error && <div className={styles.error_msg}>{error}</div>}
       </div>
     </>
   )

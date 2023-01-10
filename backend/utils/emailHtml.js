@@ -85,7 +85,7 @@ exports.emailOtp = otp => {
     </head>
     <body>
       <h1>OTP Code</h1>
-      <p>Your OTP code is: <strong>{{ ${otp} }}</strong>
+      <p>Your OTP code is: <strong> ${otp} </strong>
       </p>
       <p>Don't share this code with anyone for security reasons.</p>
     </body>

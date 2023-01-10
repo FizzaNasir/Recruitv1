@@ -49,7 +49,7 @@ exports.signUp = catchAsync(async (req, res, next) => {
 
   // Generate & Send Otp to Email & Phone
   const otp = Math.floor(1000 + Math.random() * 9000);
-  const emailOtpHtml = emailOtp(otp);
+  const html = emailOtp(otp);
   const message = 'Your OTP is ' + otp;
   // send email
   try {
@@ -57,7 +57,7 @@ exports.signUp = catchAsync(async (req, res, next) => {
       email: newUser.email,
       subject: 'Recruuit - Verify your email',
       message,
-      emailOtpHtml
+      html
     });
 
     res.status(201).json({
@@ -198,5 +198,24 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
     data: {
       user
     }
+  });
+});
+
+// Find the user with the email and update the verifyEmail Field
+exports.verifyEmail = catchAsync(async (req, res, next) => {
+  console.log(req.body.email, req.body.verifyEmail);
+  const user = await User.findOne({ email: req.body.email });
+
+  // if user not found
+  if (!user) {
+    return next(new AppError('No user found with that email', 404));
+  }
+
+  // update the verifyEmail field
+  user.emailVerify = req.body.verifyEmail;
+  await user.save({ validateBeforeSave: false });
+
+  return res.status(200).json({
+    status: 'success'
   });
 });
