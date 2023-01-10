@@ -14,6 +14,19 @@ const userSchema = new mongoose.Schema({
     lowercase: true,
     validate: [validator.isEmail, 'Please provide a valid email']
   },
+  emailVerify: {
+    type: Boolean,
+    default: false
+  },
+  phoneNo: {
+    type: String,
+    unique: true,
+    default: null
+  },
+  phoneVerify: {
+    type: Boolean,
+    default: false
+  },
   password: {
     type: String,
     required: [true, 'Please provide a password'],
@@ -38,12 +51,7 @@ const userSchema = new mongoose.Schema({
   },
   passwordChangedAt: Date,
   passwordResetToken: String,
-  passwordResetExpires: Date,
-  twoWayAuth: {
-    type: Boolean,
-    default: false,
-    select: false
-  }
+  passwordResetExpires: Date
 });
 
 // Encrypt password using bcrypt

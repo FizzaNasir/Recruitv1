@@ -5,7 +5,7 @@ const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const User = require('../models/userModel');
 const sendEmail = require('../utils/email');
-const { emailHtml } = require('../utils/emailHtml');
+const { emailHtml, emailOtp } = require('../utils/emailHtml');
 // Sending JWT token and storing it in cookie
 const signToken = id => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -47,13 +47,34 @@ exports.signUp = catchAsync(async (req, res, next) => {
   // Sign the token and send it to the client
   const token = signToken(newUser._id);
 
-  res.status(201).json({
-    status: 'success',
-    token,
-    data: {
-      user: newUser
-    }
-  });
+  // Generate & Send Otp to Email & Phone
+  const otp = Math.floor(1000 + Math.random() * 9000);
+  const emailOtpHtml = emailOtp(otp);
+  const message = 'Your OTP is ' + otp;
+  // send email
+  try {
+    sendEmail({
+      email: newUser.email,
+      subject: 'Recruuit - Verify your email',
+      message,
+      emailOtpHtml
+    });
+
+    res.status(201).json({
+      status: 'success',
+      token,
+      data: {
+        user: newUser,
+        otp
+      }
+    });
+  } catch (err) {
+    console.log(err);
+    return next(
+      new AppError('There was an error verifying the email. Try again later!'),
+      500
+    );
+  }
 });
 
 /**
@@ -104,8 +125,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   const resetToken = user.createPasswordResetToken();
   await user.save({ validateBeforeSave: false });
 
-  //localhost:3006/resetPwd
-  // http: // 3. Send it to user's email
+  // 3. Send it to user's email
   const resetURL = `${req.protocol}://localhost:3006/resetPassword/${resetToken}`;
   const message = `Forgot your password? Submit a PATCH request with your new password and passwordConfirm to: ${resetURL}.\nIf you didn't forget your password, please ignore this email!`;
   const html = emailHtml(resetURL);

@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import styles from './SignUp.module.css'
 import Header from '../../components/Header/Header'
 import { signUp } from '../../util/api-call'
+import { EmailOtp } from '../EmailandPhoneConfirmation/EmailOtp'
 
 const Signup = () => {
   const [data, setData] = useState({
@@ -38,12 +39,12 @@ const Signup = () => {
     }
 
     if (password !== passwordConfirm) {
-      setError('Passwords do not match')
+      setError('Password  s do not match')
       return
     }
     const res = await signUp({ name, email, password, passwordConfirm })
     if (res === 200) {
-      navigate('/login')
+      navigate('/verifyYourEmail')
     }
     setError('Email already exists or Server error')
   }

@@ -7,6 +7,8 @@ import {
   Profile,
   ErrorPage,
   DashBoard,
+  EmailOtp,
+  PhoneNbrVerify,
 } from './exports'
 function App() {
   return (
@@ -16,11 +18,11 @@ function App() {
       <Route path='/resetPwd' exact element={<ResetPwd />} />
       <Route path='/dashboard' exact element={<DashBoard />} />
       <Route path='/resetPassword/:token' exact element={<SetPwd />} />
-      <Route path='/OtpScreen' exact element={<OtpScreen />} />
-      <Route path='/phoneValidation' exact element={<PhoneValidation />} />
+      <Route path='/verifyYourEmail' exact element={<EmailOtp />} />
+      <Route path='/verifyYourPhoneNbr' exact element={<PhoneNbrVerify />} />
 
       {/* for page after skiping */}
-      {/* <Route path='/phoneValidation' exact element={<PhoneValidation />} /> */}
+      {/* <Route path='/PhoneNbrVerify' exact element={<PhoneNbrVerify />} /> */}
       <Route path='/profile' exact element={<Profile />} />
       <Route path='/' exact element={<Navigate replace to='/login' />} />
       <Route path='*' exact element={<ErrorPage />} />

@@ -54,3 +54,40 @@ exports.emailHtml = resetPasswordLink => {
 </html>
 `;
 };
+
+// email for sending otp
+exports.emailOtp = otp => {
+  return `<!DOCTYPE html>
+  <html>
+    <head>
+      <title>OTP Code</title>
+      <style>
+        /* Add some basic styling */
+        body {
+          font-family: Arial, sans-serif;
+        }
+  
+        h1 {
+          color: #1f5e9e;
+          text-align: center;
+        }
+  
+        p {
+          font-size: 14px;
+          margin-bottom: 20px;
+        }
+  
+        strong {
+          color: #e60000;
+          font-size: 18px;
+        }
+      </style>
+    </head>
+    <body>
+      <h1>OTP Code</h1>
+      <p>Your OTP code is: <strong>{{ ${otp} }}</strong>
+      </p>
+      <p>Don't share this code with anyone for security reasons.</p>
+    </body>
+  </html>`;
+};
