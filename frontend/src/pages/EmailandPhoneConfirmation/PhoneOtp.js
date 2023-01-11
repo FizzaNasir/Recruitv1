@@ -41,7 +41,7 @@ const PhoneOtp = (props) => {
   }
 
   // function for handling the submit button
-  async function handleSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault()
 
     // construct the otp from the state
@@ -50,7 +50,7 @@ const PhoneOtp = (props) => {
     // check if the otp from state is equal to the otp from local storage
     try {
       console.log(confirmationObj, 'here')
-      await confirmationObj.confirm(otpFromState)
+      //await confirmationObj.confirm(otpFromState)
       navigate('/dashboard')
 
       // Need to Update Backend as well

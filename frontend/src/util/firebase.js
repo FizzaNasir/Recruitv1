@@ -3,13 +3,13 @@ import { initializeApp } from 'firebase/app'
 import { getAuth } from 'firebase/auth'
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyDbtziCEDXYFsp_fiC0LUqox-ChmCmh-gk',
-  authDomain: 'recruuittest.firebaseapp.com',
-  projectId: 'recruuittest',
-  storageBucket: 'recruuittest.appspot.com',
-  messagingSenderId: '1079433721729',
-  appId: '1:1079433721729:web:969104645573018e121a80',
-  measurementId: 'G-GJSS86M21Y',
+  apiKey: 'AIzaSyDVzx6SnkRAh5rT7NPVpbtCO6F7W0eEKkU',
+  authDomain: 'recruuit2.firebaseapp.com',
+  projectId: 'recruuit2',
+  storageBucket: 'recruuit2.appspot.com',
+  messagingSenderId: '338256377229',
+  appId: '1:338256377229:web:e90e8f41002a4a06d379c4',
+  measurementId: 'G-67J65BZ50J',
 }
 
 // Initialize Firebase

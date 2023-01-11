@@ -51,7 +51,6 @@ export default function Phone_validation() {
     const { CountryCode, SimCode, number } = phone
     const PhoneNumber = CountryCode + SimCode + number
 
-    console.log('first')
     try {
       const res = await configureCaptcha(PhoneNumber)
       console.log(res)
