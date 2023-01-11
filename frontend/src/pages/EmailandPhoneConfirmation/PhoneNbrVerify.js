@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Navbar from '../../components/Navbar'
 import styles from './styles.module.css'
 import { useEffect } from 'react'
+import Header from '../../components/Header/Header'
 export default function Phone_validation() {
   // State for Phone Number
   const [phone, setphone] = useState({
@@ -31,7 +32,7 @@ export default function Phone_validation() {
   }
   return (
     <>
-      <Navbar />
+      <Header />
       <div className={styles.centered}>
         <h1 className={styles.prompt}>Two Way Authentication</h1>
         <div className={styles.gridContainer}>
