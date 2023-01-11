@@ -4,9 +4,11 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import Header from '../../components/Header/Header'
 import { verifyEmail } from '../../util/api-call'
+import { useSelector } from 'react-redux'
 // State for storing the otp digits
 const PhoneOtp = (props) => {
   const phoneNbr = localStorage.getItem('PhoneNumber')
+  const confirmationObj = useSelector((state) => state.confirmObj.obj)
   // take phone number from previous page
 
   const [otpDigits, setotpDigits] = useState({
@@ -41,18 +43,14 @@ const PhoneOtp = (props) => {
   // function for handling the submit button
   async function handleSubmit(e) {
     e.preventDefault()
-    // if all the fields are filled then take otp from local storage
-    const otp = localStorage.getItem('otp')
+
     // construct the otp from the state
     const otpFromState =
       Digit_1 + Digit_2 + Digit_3 + Digit_4 + Digit_5 + Digit_6
     // check if the otp from state is equal to the otp from local storage
     try {
-      const confirmationObj = JSON.parse(
-        localStorage.getItem('confirmationResult')
-      )
-      console.log(confirmationObj)
-      await confirmationObj.confirm(otp)
+      console.log(confirmationObj, 'here')
+      await confirmationObj.confirm(otpFromState)
       navigate('/dashboard')
 
       // Need to Update Backend as well

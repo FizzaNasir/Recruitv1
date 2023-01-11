@@ -1,15 +1,13 @@
 import { useState } from 'react'
 import styles from './styles.module.css'
-import { useEffect } from 'react'
+import { storeObject } from '../../store/actions'
+import { useDispatch } from 'react-redux'
 import Header from '../../components/Header/Header'
 import { useNavigate } from 'react-router'
-import {
-  getAuth,
-  RecaptchaVerifier,
-  signInWithPhoneNumber,
-} from 'firebase/auth'
+import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth'
 import { auth } from '../../util/firebase'
 
+import { objActions } from '../../store/reduxStore'
 export default function Phone_validation() {
   // State for Phone Number
   const [phone, setphone] = useState({
@@ -52,13 +50,12 @@ export default function Phone_validation() {
     // if all the fields are filled then sum up the Number
     const { CountryCode, SimCode, number } = phone
     const PhoneNumber = CountryCode + SimCode + number
-    console.log(PhoneNumber)
 
     console.log('first')
     try {
       const res = await configureCaptcha(PhoneNumber)
       console.log(res)
-      localStorage.setItem('confirmationResult', JSON.stringify(res))
+      objActions.save(res)
       navigate('/verifyYourPhoneNbr')
     } catch (err) {
       console.log(err)
