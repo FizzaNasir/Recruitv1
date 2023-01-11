@@ -1,8 +1,15 @@
 import { useState } from 'react'
-import Navbar from '../../components/Navbar'
 import styles from './styles.module.css'
 import { useEffect } from 'react'
 import Header from '../../components/Header/Header'
+import { useNavigate } from 'react-router'
+import {
+  getAuth,
+  RecaptchaVerifier,
+  signInWithPhoneNumber,
+} from 'firebase/auth'
+import { auth } from '../../util/firebase'
+
 export default function Phone_validation() {
   // State for Phone Number
   const [phone, setphone] = useState({
@@ -10,6 +17,7 @@ export default function Phone_validation() {
     SimCode: '',
     number: '',
   })
+  const navigate = useNavigate()
 
   // Function for handling the Change of State
   function handleChange(e) {
@@ -25,11 +33,38 @@ export default function Phone_validation() {
       document.querySelector('[name="number"]').focus()
     }
   }
+  // function
+  const configureCaptcha = (phoneNbr) => {
+    console.log(auth)
+    // set new recaptcha verifier window property
+    const recaptchaVerifier = new RecaptchaVerifier(
+      'recaptcha-container',
+      {},
+      auth
+    )
+    recaptchaVerifier.render()
+
+    return signInWithPhoneNumber(auth, phoneNbr, recaptchaVerifier)
+  }
 
   // function for handling the button click
-  function handleClick() {
-    // pending
+  async function sendOtp() {
+    // if all the fields are filled then sum up the Number
+    const { CountryCode, SimCode, number } = phone
+    const PhoneNumber = CountryCode + SimCode + number
+    console.log(PhoneNumber)
+
+    console.log('first')
+    try {
+      const res = await configureCaptcha(PhoneNumber)
+      console.log(res)
+      localStorage.setItem('confirmationResult', JSON.stringify(res))
+      navigate('/verifyYourPhoneNbr')
+    } catch (err) {
+      console.log(err)
+    }
   }
+  const verifyOtp = async (phoneNbr) => {}
   return (
     <>
       <Header />
@@ -67,7 +102,12 @@ export default function Phone_validation() {
               onChange={handleChange}
               maxLength='7'
             />
-            <button className={styles.send_btn} onClick={handleClick}>
+            <div id='recaptcha-container' className={styles.recaptcha}></div>
+            <button
+              id='sign-in-button'
+              className={styles.send_btn}
+              onClick={sendOtp}
+            >
               Send Code
             </button>
           </div>

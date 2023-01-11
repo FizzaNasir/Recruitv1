@@ -17,7 +17,7 @@ export const signUp = async (data) => {
     console.log(res.status)
     return res
   } catch (err) {
-    console.log(err)
+    console.log(err + 'here')
     return err.response.data.message
   }
 }

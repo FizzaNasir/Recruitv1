@@ -4,20 +4,24 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import Header from '../../components/Header/Header'
 import { verifyEmail } from '../../util/api-call'
-
 // State for storing the otp digits
-const EmailOtp = () => {
+const PhoneOtp = (props) => {
+  const phoneNbr = localStorage.getItem('PhoneNumber')
+  // take phone number from previous page
+
   const [otpDigits, setotpDigits] = useState({
     Digit_1: '',
     Digit_2: '',
     Digit_3: '',
     Digit_4: '',
+    Digit_5: '',
+    Digit_6: '',
   })
 
   const [error, setError] = useState('') // State for storing the error message
   const navigate = useNavigate()
 
-  const { Digit_1, Digit_2, Digit_3, Digit_4 } = otpDigits // digits
+  const { Digit_1, Digit_2, Digit_3, Digit_4, Digit_5, Digit_6 } = otpDigits // digits
 
   // Handle change function for the input fields
   function handleChange(e) {
@@ -40,16 +44,23 @@ const EmailOtp = () => {
     // if all the fields are filled then take otp from local storage
     const otp = localStorage.getItem('otp')
     // construct the otp from the state
-    const otpFromState = Digit_1 + Digit_2 + Digit_3 + Digit_4
+    const otpFromState =
+      Digit_1 + Digit_2 + Digit_3 + Digit_4 + Digit_5 + Digit_6
     // check if the otp from state is equal to the otp from local storage
-    if (otp === otpFromState) {
-      // if the otp is correct then update the DB & move to next page
-      const email = localStorage.getItem('email')
-      const data = { email, verifyEmail: true }
+    try {
+      const confirmationObj = JSON.parse(
+        localStorage.getItem('confirmationResult')
+      )
+      console.log(confirmationObj)
+      await confirmationObj.confirm(otp)
+      navigate('/dashboard')
+
+      // Need to Update Backend as well
+      // const email = localStorage.getItem('email')
+      // const data = { email, verifyEmail: true }
       // make a post request to the server
-      await verifyEmail(data)
-      navigate('/enterYourPhoneNbr')
-    } else {
+      // await verifyEmail(data)
+    } catch (err) {
       setError('Incorrect OTP')
     }
   }
@@ -59,7 +70,7 @@ const EmailOtp = () => {
       <Header />
       <div className={styles.centered}>
         <div className={styles.prompt}>
-          <>OTP has been sent to your email. Enter here for verification</>
+          <>OTP has been sent to your Phone. Enter here for verification</>
         </div>
         <div className={styles.digitgroup}>
           <div>
@@ -91,6 +102,21 @@ const EmailOtp = () => {
               Id='Digit-4'
               Name='Digit_4'
               DataPrevious='Digit-3'
+              DataNext='Digit-5'
+              handleChangestate={handleChange}
+            />
+            <InputField
+              Value={Digit_5}
+              Id='Digit-5'
+              Name='Digit_5'
+              DataNext='Digit-6'
+              handleChangestate={handleChange}
+            />
+            <InputField
+              Value={Digit_6}
+              Id='Digit-6'
+              Name='Digit_6'
+              DataPrevious='Digit-5'
               handleChangestate={handleChange}
             />
           </div>
@@ -99,7 +125,7 @@ const EmailOtp = () => {
             className={styles.send_btn}
             onClick={handleSubmit}
           >
-            Send
+            Submit
           </button>
         </div>
         {error && <div className={styles.error_msg}>{error}</div>}
@@ -108,4 +134,4 @@ const EmailOtp = () => {
   )
 }
 
-export default EmailOtp
+export default PhoneOtp
