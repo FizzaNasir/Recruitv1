@@ -5,12 +5,12 @@ import { useNavigate } from 'react-router'
 import Header from '../../components/Header/Header'
 import { verifyEmail } from '../../util/api-call'
 import { useSelector } from 'react-redux'
-// State for storing the otp digits
-const PhoneOtp = (props) => {
-  const phoneNbr = localStorage.getItem('PhoneNumber')
-  const confirmationObj = useSelector((state) => state.confirmObj.obj)
-  // take phone number from previous page
 
+// State for storing the otp digits
+const PhoneOtp = () => {
+  const confirmationObj = useSelector((state) => state.confirmObj.obj)
+
+  // State for storing the otp digits
   const [otpDigits, setotpDigits] = useState({
     Digit_1: '',
     Digit_2: '',

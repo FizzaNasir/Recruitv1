@@ -31,7 +31,8 @@ export default function Phone_validation() {
       document.querySelector('[name="number"]').focus()
     }
   }
-  // function
+
+  // function for showing the recaptcha before sending otp code
   const configureCaptcha = (phoneNbr) => {
     console.log(auth)
     // set new recaptcha verifier window property
@@ -45,7 +46,7 @@ export default function Phone_validation() {
     return signInWithPhoneNumber(auth, phoneNbr, recaptchaVerifier)
   }
 
-  // function for handling the button click
+  // function for sending the otp code to phone Number
   async function sendOtp() {
     // if all the fields are filled then sum up the Number
     const { CountryCode, SimCode, number } = phone
@@ -60,7 +61,7 @@ export default function Phone_validation() {
       console.log(err)
     }
   }
-  const verifyOtp = async (phoneNbr) => {}
+
   return (
     <>
       <Header />
