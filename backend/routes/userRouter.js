@@ -1,7 +1,7 @@
 const express = require('express');
 
-const userController = require('./../controllers/userController');
-const authController = require('./../controllers/authController');
+const userController = require('../controllers/userController');
+const authController = require('../controllers/authController');
 
 const router = express.Router();
 
@@ -19,3 +19,4 @@ router.post('/verifyEmail', authController.verifyEmail);
 // router.patch('/updateMyPassword', authController.updatePassword);
 
 module.exports = router;
+    

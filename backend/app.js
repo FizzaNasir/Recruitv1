@@ -9,7 +9,8 @@ const cors = require('cors');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
-const userRouter = require('./routes/userRoutes');
+const userRouter = require('./routes/userRouter');
+const jobRouter = require('./routes/jobRouter');
 
 // Start express app
 const app = express();
@@ -33,15 +34,20 @@ app.use('/api', limiter);
 
 // Body parser, reading data from body into req.body
 app.use(express.json({ limit: '10kb' }));
+// set app to send only json not views
+app.use(express.static(path.join(__dirname, 'public')));
 
-// Data sanitization against NoSQL query injection, will remove all $ and . from the body
+// Data sanitizat ion against NoSQL query injection, will remove all $ and . from the body
 app.use(mongoSanitize());
 
 // Data sanitization against XSS attacks, will remove all html tags from the body
 app.use(xss());
 
+
 // Routes Starts from here
 app.use('/recruuit/v1/users', userRouter);
+app.use('/recruuit/v1/jobs', jobRouter);
+
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
