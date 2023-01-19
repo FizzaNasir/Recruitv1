@@ -11,6 +11,7 @@ const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 const userRouter = require('./routes/userRouter');
 const jobRouter = require('./routes/jobRouter');
+const testRouter = require('./routes/testRouter');
 
 // Start express app
 const app = express();
@@ -47,7 +48,7 @@ app.use(xss());
 // Routes Starts from here
 app.use('/recruuit/v1/users', userRouter);
 app.use('/recruuit/v1/jobs', jobRouter);
-
+app.use ('/recruuit/v1/tests', testRouter);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
