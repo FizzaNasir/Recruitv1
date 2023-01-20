@@ -1,0 +1,84 @@
+.heading {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #000;
+  margin-bottom: 50px;
+}
+.card {
+  width: 60%;
+  height: 100%;
+  margin: auto;
+  margin-top: 40px;
+
+  align-items: center;
+  background-color: #fff;
+  border-radius: 10px;
+
+  box-shadow: -1px 1px 12px 1px rgba(0, 0, 0, 0.83);
+  -webkit-box-shadow: -1px 1px 12px 1px rgba(0, 0, 0, 0.83);
+  -moz-box-shadow: -1px 1px 12px 1px rgba(0, 0, 0, 0.83);
+  padding: 20px;
+
+  animation: card 0.5s ease;
+}
+@keyframes card {
+  0% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.button {
+  height: 40px;
+  background-color: rgb(71, 8, 180);
+  color: #fff;
+  width: 200px;
+  border: none;
+  border-radius: 5px;
+  font-weight: 600;
+
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.questionTex {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #000;
+  width: 80%;
+}
+
+.option {
+  width: 70%;
+  transition: all 0.3s ease;
+  font-size: 1.2rem;
+  text-align: center;
+  font-weight: 600;
+  color: #000;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 20px;
+  margin: 20px 0px;
+}
+
+.input {
+  width: 100%;
+  height: 40px;
+  border: none;
+
+  font-size: 1.2rem;
+
+  font-weight: 600;
+  color: #000;
+  outline: none;
+  transition: all 0.3s ease;
+}

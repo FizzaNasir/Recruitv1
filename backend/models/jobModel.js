@@ -19,7 +19,7 @@ const jobSchema = new mongoose.Schema({
     mode : {
         type: String,
         required: [true, 'Please provide a mode for the job'],
-        enum: ['Remote', 'Onsite', 'Both' ]
+        enum: ['Remote', 'Onsite', 'Hybrid' ]
     },
     type: {
         type: String,

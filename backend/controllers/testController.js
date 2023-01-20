@@ -39,4 +39,4 @@ exports.getTest = catchAsync(async (req, res, next) => {
             test
         }
     });
-});
+}); 

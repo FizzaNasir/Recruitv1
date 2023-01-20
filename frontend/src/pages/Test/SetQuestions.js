@@ -3,24 +3,14 @@ import React, { useState, useEffect } from 'react'
 import Header from '../../components/Header/Header'
 import classes from './Test.module.css'
 import EachQuestion from './EachQuestion'
+import { useNavigate } from 'react-router-dom'
 
-import {
-  Card,
-  CardContent,
-  FormControl,
-  MenuItem,
-  TextField,
-  Button,
-  Typography,
-  Grid,
-  InputLabel,
-  Select,
-  Paper,
-} from '@mui/material'
+import { Card, Button, Typography } from '@mui/material'
 
 import { createTest } from '../../util/api-call'
 
 const SetQuestions = () => {
+  const navigate = useNavigate()
   const [totalQuestions, setTotalQuestions] = useState(0)
   useEffect(() => {
     const options = JSON.parse(localStorage.getItem('testOptions'))
@@ -47,8 +37,9 @@ const SetQuestions = () => {
 
     const response = await createTest(test)
     console.log(response)
-    if (response.status === 201) {
+    if (response.status === 200) {
       localStorage.removeItem('testOptions')
+      navigate('/dashboard')
     } else {
       console.log(response)
     }

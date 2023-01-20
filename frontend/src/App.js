@@ -14,6 +14,7 @@ import {
   PhoneOtp,
   CreateTest,
   SetQuestions,
+  PostJob,
 } from './exports'
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
           <Route path='/contactUs' exact element={<ContactUs />} />
           <Route path='/test/createTest' exact element={<CreateTest />} />
           <Route path='/test/set-questions' exact element={<SetQuestions />} />
+          <Route path='/postJob' exact element={<PostJob />} />
 
           {/* for page after skiping */}
           {/* <Route path='/PhoneNbrVerify' exact element={<PhoneNbrVerify />} /> */}

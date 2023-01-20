@@ -67,6 +67,16 @@ export const verifyEmail = async (data) => {
   }
 }
 
+export const postJob = async (data) => {
+  try {
+    const res = await axios.post(`${url}jobs/createJob`, data, config)
+    return 200
+  } catch (err) {
+    console.log(err)
+    return err.response.data.message
+  }
+}
+
 export const createTest = async (data) => {
   try {
     const res = await axios.post(`${url}tests/createTest`, data, config)

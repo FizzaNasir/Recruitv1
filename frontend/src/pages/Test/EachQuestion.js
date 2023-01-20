@@ -75,8 +75,9 @@ const EachQuestion = (props) => {
                 marginTop: '20px',
                 fontSize: '20px',
                 maxHeight: '80px',
+                padding: '10px',
                 maxWidth: '700px',
-                border: '1px solid black',
+                border: '1px solid #ccc',
               }}
             />
             <br />
