@@ -8,20 +8,20 @@ const testSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Please provide a description for the test']
     },
-    questions: {
-        type: [String],
-        required: [true, 'Please provide questions for the test'],
-        default: []
-    },
-    answers: {
-        type: [String],
-        required: [true, 'Please provide answers for the test'],
-        default: []
-    },
     time : {
         type: Number,
         required: [true, 'Please provide a time for the test'],
-        }
+        },
+    noOfQuestions: {
+        type: Number,
+        required: [true, 'Please provide a number of questions for the test'],
+    },
+    questions: {
+        type: [Object],
+        required: [true, 'Please provide questions for the test'],
+        default: []
+    },
+ 
 });
 
 const Test = mongoose.model('Test', testSchema);

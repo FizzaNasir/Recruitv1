@@ -35,8 +35,8 @@ function App() {
           />
           <Route path='/verifyYourPhoneNbr' exact element={<PhoneOtp />} />
           <Route path='/contactUs' exact element={<ContactUs />} />
-          <Route path='/createTest' exact element={<CreateTest />} />
-          <Route path='/setQuestions' exact element={<SetQuestions />} />
+          <Route path='/test/createTest' exact element={<CreateTest />} />
+          <Route path='/test/set-questions' exact element={<SetQuestions />} />
 
           {/* for page after skiping */}
           {/* <Route path='/PhoneNbrVerify' exact element={<PhoneNbrVerify />} /> */}

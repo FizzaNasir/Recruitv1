@@ -6,8 +6,8 @@ const Test = require('../models/testModel');
 // Create a new test
 exports.createTest = catchAsync(async (req, res, next) => {
     // Data validation on Server Side
-    const {title, description, questions, answers, time} = req.body;
-    if (!title || !description || !questions || !answers || !time) {
+    const {title, description, questions, noOfQuestions, time} = req.body;
+    if (!title || !description || !questions || !noOfQuestions || !time) {
         return next(new AppError('Please provide all the fields', 400));
     }
     // Create a new test in the database using the data from the request body
@@ -15,7 +15,7 @@ exports.createTest = catchAsync(async (req, res, next) => {
         title,
         description,
         questions,
-        answers,
+        noOfQuestions,
         time
     });
 

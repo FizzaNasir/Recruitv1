@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+
 import Header from '../../components/Header/Header'
 import classes from './Test.module.css'
+import EachQuestion from './EachQuestion'
 
 import {
   Card,
@@ -9,130 +11,88 @@ import {
   MenuItem,
   TextField,
   Button,
+  Typography,
   Grid,
   InputLabel,
   Select,
   Paper,
 } from '@mui/material'
 
+import { createTest } from '../../util/api-call'
+
 const SetQuestions = () => {
-  const [question, setQuestions] = useState({
-    question: '',
-    optionA: '',
-    optionB: '',
-    optionC: '',
-    optionD: '',
-    correctAnswer: '',
-  })
+  const [totalQuestions, setTotalQuestions] = useState(0)
+  useEffect(() => {
+    const options = JSON.parse(localStorage.getItem('testOptions'))
+    console.log(options)
+    setTotalQuestions(+options.NoOfQuestions)
+  }, [])
+
+  const [questions, setQuestions] = useState([])
+  const options = JSON.parse(localStorage.getItem('testOptions'))
 
   const handleChange = (event) => {
-    setQuestions({ ...question, [event.target.name]: event.target.value })
+    // setQuestions({ ...question, [event.target.name]: event.target.value })
   }
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
-    console.log(question)
+    // save the test to the database
+    const test = {
+      title: options.testTitle,
+      description: options.testDescription,
+      time: options.time,
+      noOfQuestions: options.NoOfQuestions,
+      questions,
+    }
+
+    const response = await createTest(test)
+    console.log(response)
+    if (response.status === 201) {
+      localStorage.removeItem('testOptions')
+    } else {
+      console.log(response)
+    }
   }
+  console.log(totalQuestions)
+  const addQuestion = (question) => {
+    setQuestions([...questions, question])
+    setTotalQuestions(totalQuestions - 1)
+  }
+
   return (
     <>
       <Header />
-      <div className={classes.root}>
-        <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <Paper className={classes.paper}>
-              <form onSubmit={handleSubmit}>
-                <TextField
-                  required
-                  id='question'
-                  name='question'
-                  label='Question'
-                  className={classes.textField}
-                  value={question.question}
-                  onChange={handleChange}
-                  margin='normal'
-                />
-                <br />
-                <br />
-                <TextField
-                  required
-                  id='optionA'
-                  name='optionA'
-                  label='Option A'
-                  className={classes.textField}
-                  value={question.optionA}
-                  onChange={handleChange}
-                  margin='normal'
-                />
-                <br />
-                <br />
-                <TextField
-                  required
-                  id='optionB'
-                  name='optionB'
-                  label='Option B'
-                  className={classes.textField}
-                  value={question.optionB}
-                  onChange={handleChange}
-                  margin='normal'
-                />
-                <br />
-                <br />
-                <TextField
-                  required
-                  id='optionC'
-                  name='optionC'
-                  label='Option C'
-                  className={classes.textField}
-                  value={question.optionC}
-                  onChange={handleChange}
-                  margin='normal'
-                />
-                <br />
-                <br />
-                <TextField
-                  required
-                  id='optionD'
-                  name='optionD'
-                  label='Option D'
-                  className={classes.textField}
-                  value={question.optionD}
-                  onChange={handleChange}
-                  margin='normal'
-                />
-                <br />
-                <br />
-                <FormControl className={classes.formControl}>
-                  <InputLabel htmlFor='correctOption'>
-                    Correct Option
-                  </InputLabel>
-                  <Select
-                    value={question.correctOption}
-                    onChange={handleChange}
-                    inputProps={{
-                      name: 'correctOption',
-                      id: 'correctOption',
-                    }}
-                  >
-                    <MenuItem value='A'>A</MenuItem>
-                    <MenuItem value='B'>B</MenuItem>
-                    <MenuItem value='C'>C</MenuItem>
-                    <MenuItem value='D'>D</MenuItem>
-                  </Select>
-                </FormControl>
-                <br />
-                <br />
-                <Button
-                  type='submit'
-                  variant='contained'
-                  color='primary'
-                  className={classes.button}
-                >
-                  Add Question
-                </Button>
-              </form>
-            </Paper>
-          </Grid>
-        </Grid>
-      </div>
+      <Card className={classes.card}>
+        {totalQuestions > 0 ? (
+          <Typography
+            variant='h4'
+            style={{ textAlign: 'center', marginTop: '40px' }}
+          >
+            Question {questions.length + 1} of{' '}
+            {totalQuestions + questions.length}
+            <EachQuestion addQuestion={addQuestion} />
+          </Typography>
+        ) : (
+          <>
+            <Typography
+              variant='h6'
+              style={{ textAlign: 'center', marginTop: '40px' }}
+            >
+              Your Test has been created successfully Please click on the button
+              below to save your test
+            </Typography>
+
+            <Button
+              variant='contained'
+              color='primary'
+              style={{ marginTop: '40px' }}
+              onClick={handleSubmit}
+            >
+              Submit
+            </Button>
+          </>
+        )}
+      </Card>
     </>
   )
 }
