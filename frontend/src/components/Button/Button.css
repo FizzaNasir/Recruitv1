@@ -11,16 +11,16 @@
  
 }
 
-.variantOne{
+.btnVariantOne{
   background-color: white;
   color:black;
 }
-.variantTwo{
+.btnVariantTwo{
   background-color: #412a94;
   color: white;
 }
 
-.variantTwo:hover {
+.btnVariantTwo:hover {
   background-color: #6a4f9c;
   transition: all 0.5s ease;
   transform: scaleX(0.95);

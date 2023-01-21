@@ -8,7 +8,7 @@ font-weight: 200; */
 body {
   height: 100vh;
 }
-.digitgroup input,
+/* .digitgroup input,
 .gridContainer input {
   width: 50px;
   height: 50px;
@@ -20,7 +20,7 @@ body {
   font-weight: 200;
   color: black;
   margin-right: 10px;
-}
+} */
 .digitgroup input:focus {
   outline: none;
 }

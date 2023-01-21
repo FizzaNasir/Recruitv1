@@ -82,6 +82,7 @@ export default function Phone_validation() {
               Value={phone.CountryCode}
               MaxLength='10'
               DataNext='SimCode'
+              // Variant="inputVariantOne"
             />
             <InputField
               Type='number'
@@ -91,6 +92,7 @@ export default function Phone_validation() {
               Value={phone.SimCode}
               handleChangestate={handleChange}
               MaxLength='3'
+              // Variant="inputVariantOne"
             />
 
             <InputField
@@ -100,13 +102,15 @@ export default function Phone_validation() {
               Value={phone.number}
               handleChangestate={handleChange}
               MaxLength='7'
+              // Variant="inputVariantOne"
             />
             <div id='recaptcha-container' className={styles.recaptcha}></div>
             <Button
               Id='sign-in-button'
-              Variant="variantTwo"
+              Variant="btnVariantTwo"
               HandleClick={sendOtp}
               Title="Send Code"
+              
             />
             
           </div>

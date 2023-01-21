@@ -78,6 +78,8 @@ const PhoneOtp = () => {
               Name='Digit_1'
               DataNext='Digit-2'
               handleChangestate={handleChange}
+              Variant="inputVariantOne"
+
             />
             <InputField
               Value={Digit_2}
@@ -86,6 +88,7 @@ const PhoneOtp = () => {
               DataNext='Digit-3'
               DataPrevious='Digit-1'
               handleChangestate={handleChange}
+              Variant="inputVariantOne"
             />
             <InputField
               Value={Digit_3}
@@ -94,6 +97,7 @@ const PhoneOtp = () => {
               DataNext='Digit-4'
               DataPrevious='Digit-2'
               handleChangestate={handleChange}
+              Variant="inputVariantOne"
             />
             <InputField
               Value={Digit_4}
@@ -102,6 +106,7 @@ const PhoneOtp = () => {
               DataPrevious='Digit-3'
               DataNext='Digit-5'
               handleChangestate={handleChange}
+              Variant="inputVariantOne"
             />
             <InputField
               Value={Digit_5}
@@ -109,6 +114,7 @@ const PhoneOtp = () => {
               Name='Digit_5'
               DataNext='Digit-6'
               handleChangestate={handleChange}
+              Variant="inputVariantOne"
             />
             <InputField
               Value={Digit_6}
@@ -116,11 +122,12 @@ const PhoneOtp = () => {
               Name='Digit_6'
               DataPrevious='Digit-5'
               handleChangestate={handleChange}
+              Variant="inputVariantOne"
             />
           </div>
           <Button
             Type='submit'
-            Variant="variantTwo"
+            Variant="btnVariantTwo"
             HandleClick={handleSubmit}
             Title="Submit"
           />

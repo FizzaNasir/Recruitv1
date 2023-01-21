@@ -1,11 +1,12 @@
-import styles from './InputField.module.css'
+import './InputField.css'
 export default function InputField(props) {
+  const {Variant}= props;
   return (
     <input
       type='number'
       style={{ appearance: 'none', '-webkit-appearance': 'none' }}
       required
-      maxLength={props.maxLength}
+      maxLength={props.MaxLength}
       placeholder={props.Placeholder}
       value={props.Value}
       id={props.Id}
@@ -13,7 +14,8 @@ export default function InputField(props) {
       data-next={props.DataNext}
       data-previous={props.DataPrevious}
       onChange={props.handleChangestate}
-      className={styles.input}
+      className={["input", Variant].join(" ")}
+
     />
   )
 }

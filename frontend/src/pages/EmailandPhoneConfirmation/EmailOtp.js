@@ -70,6 +70,7 @@ const EmailOtp = () => {
               DataNext='Digit-2'
               handleChangestate={handleChange}
               MaxLength="1"
+              Variant="inputVariantOne"
             />
             <InputField
               Value={Digit_2}
@@ -79,6 +80,7 @@ const EmailOtp = () => {
               DataPrevious='Digit-1'
               handleChangestate={handleChange}
               MaxLength="1"
+              Variant="inputVariantOne"
             />
             <InputField
               Value={Digit_3}
@@ -88,6 +90,7 @@ const EmailOtp = () => {
               DataPrevious='Digit-2'
               handleChangestate={handleChange}
               MaxLength="1"
+              Variant="inputVariantOne"
             />
             <InputField
               Value={Digit_4}
@@ -96,11 +99,12 @@ const EmailOtp = () => {
               DataPrevious='Digit-3'
               handleChangestate={handleChange}
               MaxLength="1"
+              Variant="inputVariantOne"
             />
           </div>
           <Button
             Type='submit'
-            Variant="variantTwo"
+            Variant="btnVariantTwo"
             HandleClick={handleSubmit}
             Title= "Send"
           />
