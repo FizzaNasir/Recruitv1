@@ -1,11 +1,11 @@
-import InputField from '../../components/OTPInputField'
+import InputField from '../../components/InputField/InputField'
 import styles from './styles.module.css'
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import Header from '../../components/Header/Header'
 import { verifyEmail } from '../../util/api-call'
 import { useSelector } from 'react-redux'
-
+import Button from '../../components/Button/Button'
 // State for storing the otp digits
 const PhoneOtp = () => {
   const confirmationObj = useSelector((state) => state.confirmObj.obj)
@@ -118,13 +118,13 @@ const PhoneOtp = () => {
               handleChangestate={handleChange}
             />
           </div>
-          <button
-            type='submit'
-            className={styles.send_btn}
-            onClick={handleSubmit}
-          >
-            Submit
-          </button>
+          <Button
+            Type='submit'
+            Variant="variantTwo"
+            HandleClick={handleSubmit}
+            Title="Submit"
+          />
+         
         </div>
         {error && <div className={styles.error_msg}>{error}</div>}
       </div>

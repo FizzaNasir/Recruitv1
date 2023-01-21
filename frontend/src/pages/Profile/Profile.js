@@ -4,6 +4,7 @@ import styles from './Profile.module.css';
 import Header from '../../components/Header/Header';
 import profileImg from '../../assests/profile.webp';
 import editImg from '../../assests/edit.png'
+import Button from '../../components/Button/Button';
 
 const Profile = () => {
   const [data, setData] = useState({
