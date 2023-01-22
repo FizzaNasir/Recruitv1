@@ -6,6 +6,7 @@ import profileImg from '../../assests/profile.webp';
 import editImg from '../../assests/edit.png'
 import Button from '../../components/Button/Button';
 
+
 const Profile = () => {
   const [data, setData] = useState({
     profileImage: profileImg,

@@ -11,6 +11,7 @@ import {
   PhoneNbrVerify,
   ContactUs,
   PhoneOtp,
+  CompanyRegistration
 } from './exports'
 
 function App() {
@@ -22,11 +23,7 @@ function App() {
       <Route path='/dashboard' exact element={<DashBoard />} />
       <Route path='/resetPassword/:token' exact element={<SetPwd />} />
       <Route path='/verifyYourEmail' exact element={<EmailOtp />} />
-      <Route
-        path='/enterYourPhoneNbr'
-        exact
-        element={<PhoneNbrVerify state />}
-      />
+      <Route path='/enterYourPhoneNbr' exact element={<PhoneNbrVerify state/>}/>
       <Route path='/verifyYourPhoneNbr' exact element={<PhoneOtp />} />
       <Route path='/contactUs' exact element={<ContactUs />} />
 
@@ -35,6 +32,8 @@ function App() {
       <Route path='/profile' exact element={<Profile />} />
       <Route path='/' exact element={<Navigate replace to='/login' />} />
       <Route path='*' exact element={<ErrorPage />} />
+      <Route path='/register_company' exact element={<CompanyRegistration state/>}/>
+
     </Routes>
   )
 }
