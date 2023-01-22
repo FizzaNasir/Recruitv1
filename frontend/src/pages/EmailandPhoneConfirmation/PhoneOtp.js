@@ -1,11 +1,11 @@
-import InputField from '../../components/OTPInputField'
+import InputField from '../../components/InputField/InputField'
 import styles from './styles.module.css'
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import Header from '../../components/Header/Header'
 import { verifyEmail } from '../../util/api-call'
 import { useSelector } from 'react-redux'
-
+import Button from '../../components/Button/Button'
 // State for storing the otp digits
 const PhoneOtp = () => {
   const confirmationObj = useSelector((state) => state.confirmObj.obj)
@@ -78,6 +78,8 @@ const PhoneOtp = () => {
               Name='Digit_1'
               DataNext='Digit-2'
               handleChangestate={handleChange}
+              Variant="inputVariantOne"
+
             />
             <InputField
               Value={Digit_2}
@@ -86,6 +88,7 @@ const PhoneOtp = () => {
               DataNext='Digit-3'
               DataPrevious='Digit-1'
               handleChangestate={handleChange}
+              Variant="inputVariantOne"
             />
             <InputField
               Value={Digit_3}
@@ -94,6 +97,7 @@ const PhoneOtp = () => {
               DataNext='Digit-4'
               DataPrevious='Digit-2'
               handleChangestate={handleChange}
+              Variant="inputVariantOne"
             />
             <InputField
               Value={Digit_4}
@@ -102,6 +106,7 @@ const PhoneOtp = () => {
               DataPrevious='Digit-3'
               DataNext='Digit-5'
               handleChangestate={handleChange}
+              Variant="inputVariantOne"
             />
             <InputField
               Value={Digit_5}
@@ -109,6 +114,7 @@ const PhoneOtp = () => {
               Name='Digit_5'
               DataNext='Digit-6'
               handleChangestate={handleChange}
+              Variant="inputVariantOne"
             />
             <InputField
               Value={Digit_6}
@@ -116,15 +122,16 @@ const PhoneOtp = () => {
               Name='Digit_6'
               DataPrevious='Digit-5'
               handleChangestate={handleChange}
+              Variant="inputVariantOne"
             />
           </div>
-          <button
-            type='submit'
-            className={styles.send_btn}
-            onClick={handleSubmit}
-          >
-            Submit
-          </button>
+          <Button
+            Type='submit'
+            Variant="btnVariantTwo"
+            HandleClick={handleSubmit}
+            Title="Submit"
+          />
+         
         </div>
         {error && <div className={styles.error_msg}>{error}</div>}
       </div>

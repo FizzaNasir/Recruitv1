@@ -1,10 +1,10 @@
-import InputField from '../../components/OTPInputField'
+import InputField from '../../components/InputField/InputField'
 import styles from './styles.module.css'
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import Header from '../../components/Header/Header'
 import { verifyEmail } from '../../util/api-call'
-
+import Button from '../../components/Button/Button'
 // State for storing the otp digits
 const EmailOtp = () => {
   const [otpDigits, setotpDigits] = useState({
@@ -69,6 +69,8 @@ const EmailOtp = () => {
               Name='Digit_1'
               DataNext='Digit-2'
               handleChangestate={handleChange}
+              MaxLength="1"
+              Variant="inputVariantOne"
             />
             <InputField
               Value={Digit_2}
@@ -77,6 +79,8 @@ const EmailOtp = () => {
               DataNext='Digit-3'
               DataPrevious='Digit-1'
               handleChangestate={handleChange}
+              MaxLength="1"
+              Variant="inputVariantOne"
             />
             <InputField
               Value={Digit_3}
@@ -85,6 +89,8 @@ const EmailOtp = () => {
               DataNext='Digit-4'
               DataPrevious='Digit-2'
               handleChangestate={handleChange}
+              MaxLength="1"
+              Variant="inputVariantOne"
             />
             <InputField
               Value={Digit_4}
@@ -92,15 +98,16 @@ const EmailOtp = () => {
               Name='Digit_4'
               DataPrevious='Digit-3'
               handleChangestate={handleChange}
+              MaxLength="1"
+              Variant="inputVariantOne"
             />
           </div>
-          <button
-            type='submit'
-            className={styles.send_btn}
-            onClick={handleSubmit}
-          >
-            Send
-          </button>
+          <Button
+            Type='submit'
+            Variant="btnVariantTwo"
+            HandleClick={handleSubmit}
+            Title= "Send"
+          />
         </div>
         {error && <div className={styles.error_msg}>{error}</div>}
       </div>
