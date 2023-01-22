@@ -53,18 +53,20 @@ const Login = () => {
                 // className={styles.input}
               />
               {error && <div className={styles.error_msg}>{error}</div>}
-              <Button Type='submit' Title="Sign In" Variant="btnVariantTwo"/>
-           
+              <Button Type='submit' Title='Sign In' Variant='btnVariantTwo' />
             </form>
             <Link to='/resetPwd'>
-              <Button Type='button' Title="Forget password?" Variant="btnVariantOne"/>
-         
+              <Button
+                Type='button'
+                Title='Forget password?'
+                Variant='btnVariantOne'
+              />
             </Link>
           </div>
           <div className={styles.right}>
             <h1>New Here ?</h1>
             <Link to='/signup'>
-              <Button Type='button' Title="Sign Up" Variant="btnVariantOne"/>
+              <Button Type='button' Title='Sign Up' Variant='btnVariantOne' />
             </Link>
           </div>
         </div>

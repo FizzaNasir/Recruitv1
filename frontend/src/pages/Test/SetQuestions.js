@@ -37,7 +37,7 @@ const SetQuestions = () => {
 
     const response = await createTest(test)
     console.log(response)
-    if (response.status === 200) {
+    if (response === 200) {
       localStorage.removeItem('testOptions')
       navigate('/dashboard')
     } else {
