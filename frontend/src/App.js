@@ -40,6 +40,11 @@ function App() {
       <Route path='/profile' exact element={<Profile />} />
       <Route path='/' exact element={<Navigate replace to='/login' />} />
       <Route path='*' exact element={<ErrorPage />} />
+      <Route
+        path='/register_company'
+        exact
+        element={<CompanyRegistration state />}
+      />
     </Routes>
   )
 }
