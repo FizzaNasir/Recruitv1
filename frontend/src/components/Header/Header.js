@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styles from './style'
-
+import { useNavigate } from 'react-router-dom'
+import { DashBoard } from '../../exports'
 const Header = () => {
   return (
     <header style={styles.header}>
@@ -9,7 +10,7 @@ const Header = () => {
       <nav>
         <ul style={styles.navList}>
           <li style={styles.navItem}>
-            <Link to='/' style={styles.navLink}>
+            <Link to='/dashboard' style={styles.navLink}>
               Home
             </Link>
           </li>
