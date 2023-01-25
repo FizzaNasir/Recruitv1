@@ -12,10 +12,12 @@ import {
   PhoneNbrVerify,
   ContactUs,
   PhoneOtp,
+  CompanyRegistration,
   CreateTest,
   SetQuestions,
   PostJob,
   Home,
+  Registration,
 } from "./exports";
 
 function App() {
@@ -36,7 +38,9 @@ function App() {
             element={<PhoneNbrVerify state />}
           />
           <Route path="/verifyYourPhoneNbr" exact element={<PhoneOtp />} />
+          <Route path="/register" exact element={<Registration />} />
           <Route path="/contactUs" exact element={<ContactUs />} />
+
           <Route path="/test/createTest" exact element={<CreateTest />} />
           <Route path="/test/set-questions" exact element={<SetQuestions />} />
           <Route path="/postJob" exact element={<PostJob />} />
@@ -47,6 +51,11 @@ function App() {
           <Route path="/home" exact element={<Home />} />
           <Route path="/" exact element={<Navigate replace to="/login" />} />
           <Route path="*" exact element={<ErrorPage />} />
+          <Route
+            path="/register_company"
+            exact
+            element={<CompanyRegistration state />}
+          />
         </Routes>
       </StyledEngineProvider>
     </>

@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import styles from './Login.module.css'
 import { login } from '../../util/api-call'
 import Header from '../../components/Header/Header'
+import InputField from '../../components/InputField/InputField'
+import Button from '../../components/Button/Button'
 
 const Login = () => {
   const [data, setData] = useState({ email: '', password: '' })
@@ -34,41 +36,37 @@ const Login = () => {
           <div className={styles.left}>
             <form className={styles.form_container} onSubmit={handleSubmit}>
               <h1>Login to Your Account</h1>
-              <input
-                type='email'
-                placeholder='Email'
-                name='email'
-                onChange={handleChange}
-                value={data.email}
-                required
-                className={styles.input}
+              <InputField
+                Type='email'
+                Placeholder='Email'
+                Name='email'
+                handleChangestate={handleChange}
+                Value={data.email}
+                // className={styles.input}
               />
-              <input
-                type='password'
-                placeholder='Password'
-                name='password'
-                onChange={handleChange}
-                value={data.password}
-                required
-                className={styles.input}
+              <InputField
+                Type='password'
+                Placeholder='Password'
+                Name='password'
+                handleChangestate={handleChange}
+                Value={data.password}
+                // className={styles.input}
               />
               {error && <div className={styles.error_msg}>{error}</div>}
-              <button type='submit' className={styles.green_btn}>
-                Sign In
-              </button>
+              <Button Type='submit' Title='Sign In' Variant='btnVariantTwo' />
             </form>
             <Link to='/resetPwd'>
-              <button type='button' className={styles.white_btn}>
-                Forget password?
-              </button>
+              <Button
+                Type='button'
+                Title='Forget password?'
+                Variant='btnVariantOne'
+              />
             </Link>
           </div>
           <div className={styles.right}>
             <h1>New Here ?</h1>
             <Link to='/signup'>
-              <button type='button' className={styles.white_btn}>
-                Sign Up
-              </button>
+              <Button Type='button' Title='Sign Up' Variant='btnVariantOne' />
             </Link>
           </div>
         </div>

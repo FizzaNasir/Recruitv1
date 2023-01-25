@@ -6,6 +6,8 @@ import Header from '../../components/Header/Header'
 import { useNavigate } from 'react-router'
 import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth'
 import { auth } from '../../util/firebase'
+import Button from '../../components/Button/Button'
+import InputField from '../../components/InputField/InputField'
 
 import { objActions } from '../../store/reduxStore'
 export default function Phone_validation() {
@@ -72,41 +74,45 @@ export default function Phone_validation() {
             Enter your Phone Number for verification
           </p>
           <div>
-            <input
-              type='text'
-              id='Ccode'
-              className={styles.input}
-              name='CountryCode'
-              value={phone.CountryCode}
-              maxLength='10'
-              data-next='SimCode'
+            <InputField
+              Type='text'
+              Id='Ccode'
+              ClassName={styles.input}
+              Name='CountryCode'
+              Value={phone.CountryCode}
+              MaxLength='10'
+              DataNext='SimCode'
+              // Variant="inputVariantOne"
             />
-            <input
-              type='number'
-              className={styles.simCode}
-              name='SimCode'
-              data-next='number'
-              value={phone.SimCode}
-              onChange={handleChange}
-              maxLength='3'
+            <InputField
+              Type='number'
+              ClassName={styles.simCode}
+              Name='SimCode'
+              DataNext='number'
+              Value={phone.SimCode}
+              handleChangestate={handleChange}
+              MaxLength='3'
+              // Variant="inputVariantOne"
             />
 
-            <input
-              type='number'
-              className={styles.number}
-              name='number'
-              value={phone.number}
-              onChange={handleChange}
-              maxLength='7'
+            <InputField
+              Type='number'
+              ClassName={styles.number}
+              Name='number'
+              Value={phone.number}
+              handleChangestate={handleChange}
+              MaxLength='7'
+              // Variant="inputVariantOne"
             />
             <div id='recaptcha-container' className={styles.recaptcha}></div>
-            <button
-              id='sign-in-button'
-              className={styles.send_btn}
-              onClick={sendOtp}
-            >
-              Send Code
-            </button>
+            <Button
+              Id='sign-in-button'
+              Variant="btnVariantTwo"
+              HandleClick={sendOtp}
+              Title="Send Code"
+              
+            />
+            
           </div>
         </div>
       </div>

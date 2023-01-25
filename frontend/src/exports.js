@@ -12,4 +12,6 @@ export { default as PhoneOtp } from "./pages/EmailandPhoneConfirmation/PhoneOtp"
 export { default as CreateTest } from "./pages/Test/CreateTest";
 export { default as SetQuestions } from "./pages/Test/SetQuestions";
 export { default as PostJob } from "./pages/postJob/PostJob";
+export { default as CompanyRegistration } from "./pages/RegisterCompany/RegisterCompany";
+export { default as Registration } from "./pages/Registration/Registration";
 export { default as Home } from "./pages/Home/Home";
