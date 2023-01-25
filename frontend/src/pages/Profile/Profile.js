@@ -1,9 +1,10 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import styles from './Profile.module.css';
-import Header from '../../components/Header/Header';
-import profileImg from '../../assests/profile.webp';
+import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import styles from './Profile.module.css'
+import Header from '../../components/Header/Header'
+import profileImg from '../../assests/profile.webp'
 import editImg from '../../assests/edit.png'
+//import Button from '../../components/Button/Button';
 
 const Profile = () => {
   const [data, setData] = useState({
@@ -22,17 +23,17 @@ const Profile = () => {
     education: 'Education here',
     skills: 'Skills here',
     workExperience: 'Work Experience',
-  });
-  const [error, setError] = useState('');
+  })
+  const [error, setError] = useState('')
   const editHandler = (e) => {
-    e.preventDefault();
-  };
+    e.preventDefault()
+  }
   return (
     <>
       <Header />
       <div className={styles.main_container}>
         <div className={styles.left_container}>
-          <img className={styles.image} src={data.profileImage} alt="Profile" />
+          <img className={styles.image} src={data.profileImage} alt='Profile' />
           <h4>{data.name}</h4>
           <p>
             {data.gender}-{data.age}
@@ -44,7 +45,9 @@ const Profile = () => {
           <p className={styles.address}>
             {data.address.inner},{data.address.city},{data.address.country}
           </p>
-          <button onClick={editHandler}>Edit <img src={editImg} /></button>
+          <button onClick={editHandler}>
+            Edit <img src={editImg} />
+          </button>
         </div>
         <div className={styles.right_container}>
           <h4>Description</h4>
@@ -58,7 +61,7 @@ const Profile = () => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Profile;
+export default Profile

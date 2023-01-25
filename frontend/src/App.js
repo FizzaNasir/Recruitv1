@@ -1,5 +1,5 @@
-import { Route, Routes, Navigate } from "react-router-dom";
-import { CssBaseline, Grid, StyledEngineProvider } from "@mui/material";
+import { Route, Routes, Navigate } from 'react-router-dom';
+import { CssBaseline, Grid, StyledEngineProvider } from '@mui/material';
 import {
   Signup,
   Login,
@@ -12,11 +12,13 @@ import {
   PhoneNbrVerify,
   ContactUs,
   PhoneOtp,
+  CompanyRegistration,
   CreateTest,
   SetQuestions,
   PostJob,
   Home,
-} from "./exports";
+  Registration,
+} from './exports';
 
 function App() {
   return (
@@ -36,7 +38,9 @@ function App() {
             element={<PhoneNbrVerify state />}
           />
           <Route path="/verifyYourPhoneNbr" exact element={<PhoneOtp />} />
+          <Route path="/register" exact element={<Registration />} />
           <Route path="/contactUs" exact element={<ContactUs />} />
+
           <Route path="/test/createTest" exact element={<CreateTest />} />
           <Route path="/test/set-questions" exact element={<SetQuestions />} />
           <Route path="/postJob" exact element={<PostJob />} />
@@ -47,6 +51,11 @@ function App() {
           <Route path="/home" exact element={<Home />} />
           <Route path="/" exact element={<Navigate replace to="/login" />} />
           <Route path="*" exact element={<ErrorPage />} />
+          <Route
+            path="/register_company"
+            exact
+            element={<CompanyRegistration state />}
+          />
         </Routes>
       </StyledEngineProvider>
     </>
