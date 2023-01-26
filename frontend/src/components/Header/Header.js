@@ -6,7 +6,11 @@ import { DashBoard } from '../../exports'
 const Header = () => {
   return (
     <header style={styles.header}>
-      <h1 style={styles.title}>Recruuit</h1>
+      <h1 style={styles.title}>
+        <Link to='/home' style={styles.titleLink}>
+          Recruuit
+        </Link>
+      </h1>
       <nav>
         <ul style={styles.navList}>
           <li style={styles.navItem}>
@@ -15,7 +19,7 @@ const Header = () => {
             </Link>
           </li>
           <li style={styles.navItem}>
-            <Link to='/contact' style={styles.navLink}>
+            <Link to='/contactUs' style={styles.navLink}>
               Contact Us
             </Link>
           </li>

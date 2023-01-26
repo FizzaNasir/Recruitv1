@@ -12,6 +12,10 @@ const styles = {
   title: {
     margin: 0,
   },
+  titleLink: {
+    color: '#fff',
+    textDecoration: 'none',
+  },
   navList: {
     display: 'flex',
     listStyle: 'none',

@@ -1,19 +1,19 @@
-import React, { useState } from "react";
-import Input from "../../components/InputField/InputField";
-import styles from "./ContactUs.module.css";
-import Header from "../../components/Header/Header";
+import React, { useState } from 'react'
+import Input from '../../components/InputField/InputField'
+import styles from './ContactUs.module.css'
+import Header from '../../components/Header/Header'
 
 function ContactUs() {
-  const [inputValue, setInputValue] = useState({});
+  const [inputValue, setInputValue] = useState({})
   // handle submit event (prevent from default)
   const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form submitted:", inputValue);
-  };
+    e.preventDefault()
+    console.log('Form submitted:', inputValue)
+  }
   // handle change
   const handleChange = (e) => {
-    setInputValue({ ...inputValue, [e.target.name]: e.target.value });
-  };
+    setInputValue({ ...inputValue, [e.target.name]: e.target.value })
+  }
 
   return (
     // block 1
@@ -27,7 +27,7 @@ function ContactUs() {
           </p>
           <ul>
             <li>
-              <a href="#">
+              <a href='#'>
                 <i></i>
               </a>
 
@@ -35,14 +35,14 @@ function ContactUs() {
               <p>123 West Street, Melbourne Victoria 3000 Australia</p>
             </li>
             <li>
-              <a href="#">
+              <a href='#'>
                 <i></i>
               </a>
               <h4>Email:</h4>
               <p>info@example.com</p>
             </li>
             <li>
-              <a href="#">
+              <a href='#'>
                 <i></i>
               </a>
               <h4>PHONE</h4>
@@ -60,32 +60,32 @@ function ContactUs() {
           </div>
           <Input
             className={styles.inputFeild}
-            Name="Name"
-            Placeholder="Enter name"
+            Name='Name'
+            Placeholder='Enter name'
             Value={inputValue.name}
             onChange={handleChange}
           />
           <Input
             className={styles.inputFeild}
-            Name="Email"
-            Placeholder="Enter email"
+            Name='Email'
+            Placeholder='Enter email'
             Value={inputValue.email}
             onChange={handleChange}
-            type="email"
+            type='email'
           />
           <Input
             className={styles.inputFeild}
-            Name="Message"
-            Placeholder="Enter your message here"
+            Name='Message'
+            Placeholder='Enter your message here'
             Value={inputValue.password}
             onChange={handleChange}
-            type="textarea"
+            type='textarea'
           />
-          <input className={styles.primaryBtn} type="submit" value="Submit" />
+          <input className={styles.primaryBtn} type='submit' value='Submit' />
         </form>
       </div>
     </div>
-  );
+  )
 }
 
-export default ContactUs;
+export default ContactUs
