@@ -1,7 +1,8 @@
-import styles from "./Home.module.css";
-import Header from "../../components/Header/Header";
-import JobPost from "../../components/JobPostCard/JobPost";
-import bnr2 from "./recruuit.jpg";
+import styles from './Home.module.css'
+import Header from '../../components/Header/Header'
+import JobPost from '../../components/JobPostCard/JobPost'
+import bnr2 from './recruuit.jpg'
+import { Link } from 'react-router-dom'
 
 function Home() {
   return (
@@ -17,7 +18,7 @@ function Home() {
           Discover your dream job, Start your career journey with us!
         </p>
         {/* create account button */}
-        <a className={styles.transparentBtn} href="#">
+        <a className={styles.transparentBtn} href='/signup'>
           Create an Account
         </a>
       </div>
@@ -67,12 +68,12 @@ function Home() {
                 as possible.
               </p>
               <div className={styles.mg_30}>
-                <a className={styles.primaryBtn} href="#">
+                <a className={styles.primaryBtn} href='#'>
                   Learn more
                 </a>
               </div>
             </div>
-            <img className={styles.about_pic} src={bnr2} alt="img" />
+            <img className={styles.about_pic} src={bnr2} alt='img' />
           </div>
         </div>
         <div className={styles.container}>
@@ -85,13 +86,13 @@ function Home() {
             <JobPost />
             <JobPost />
           </div>
-          <a className={styles.primaryBtn} href="#">
+          <a className={styles.primaryBtn} href='#'>
             Browse All Jobs
           </a>
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default Home;
+export default Home
