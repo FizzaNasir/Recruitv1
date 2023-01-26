@@ -1,5 +1,5 @@
-import { Route, Routes, Navigate } from 'react-router-dom';
-import { CssBaseline, Grid, StyledEngineProvider } from '@mui/material';
+import { Route, Routes, Navigate } from "react-router-dom";
+import { CssBaseline, Grid, StyledEngineProvider } from "@mui/material";
 import {
   Signup,
   Login,
@@ -18,7 +18,7 @@ import {
   PostJob,
   Home,
   Registration,
-} from './exports';
+} from "./exports";
 
 function App() {
   return (

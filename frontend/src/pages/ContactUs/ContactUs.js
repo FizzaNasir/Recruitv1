@@ -1,40 +1,91 @@
-import React from 'react'
-import './ContactPage.css'
-import Button from '../../components/Button/Button'
-import InputField from '../../components/InputField/InputField'
+import React, { useState } from "react";
+import Input from "../../components/InputField/InputField";
+import styles from "./ContactUs.module.css";
+import Header from "../../components/Header/Header";
 
 function ContactUs() {
+  const [inputValue, setInputValue] = useState({});
+  // handle submit event (prevent from default)
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Form submitted:", inputValue);
+  };
+  // handle change
+  const handleChange = (e) => {
+    setInputValue({ ...inputValue, [e.target.name]: e.target.value });
+  };
+
   return (
-    <div className='contact-page-container'>
-      <header className='contact-page-header'>
-        <h1>Contact Us</h1>
-        <p>Have a question or concern? Get in touch with our team.</p>
-      </header>
-      <main className='contact-page-main'>
-        <form className='contact-form'>
-          <label htmlFor='name'>Name:</label>
-          <InputField Type='text' Id='name' Name='name'/>
-          {/* <input type='text' id='name' name='name' required /> */}
+    // block 1
+    <div>
+      <Header />
+      <div className={styles.main_container}>
+        <div className={styles.contact_container}>
+          <h3>Quick Contact</h3>
+          <p>
+            If you have any questions simply use the following contact details.
+          </p>
+          <ul>
+            <li>
+              <a href="#">
+                <i></i>
+              </a>
 
-          <label htmlFor='email'>Email:</label>
-          <InputField Type='email' Id='email' Name='email' />
-          {/* <InputField type='email' id='email' name='email' required /> */}
-
-          <label htmlFor='message'>Message:</label>
-          <textarea id='message' name='message' required></textarea>
-
-          <Button Type='submit' Title="Submit"/>
-          {/* <Button className='submit-button' Type='submit' Title="Submit"/> */}
+              <h4>Address:</h4>
+              <p>123 West Street, Melbourne Victoria 3000 Australia</p>
+            </li>
+            <li>
+              <a href="#">
+                <i></i>
+              </a>
+              <h4>Email:</h4>
+              <p>info@example.com</p>
+            </li>
+            <li>
+              <a href="#">
+                <i></i>
+              </a>
+              <h4>PHONE</h4>
+              <p>+61 3 8376 6284</p>
+            </li>
+          </ul>
+        </div>
+        {/* block 2 */}
+        <form
+          className={`${styles.contact_container} ${styles.contact_form}`}
+          onSubmit={handleSubmit}
+        >
+          <div>
+            <h2>Contact Us</h2>
+          </div>
+          <Input
+            className={styles.inputFeild}
+            Name="Name"
+            Placeholder="Enter name"
+            Value={inputValue.name}
+            onChange={handleChange}
+          />
+          <Input
+            className={styles.inputFeild}
+            Name="Email"
+            Placeholder="Enter email"
+            Value={inputValue.email}
+            onChange={handleChange}
+            type="email"
+          />
+          <Input
+            className={styles.inputFeild}
+            Name="Message"
+            Placeholder="Enter your message here"
+            Value={inputValue.password}
+            onChange={handleChange}
+            type="textarea"
+          />
+          <input className={styles.primaryBtn} type="submit" value="Submit" />
         </form>
-        <section className='contact-info'>
-          <h2>Recruuit Team</h2>
-          <p>Email: contact@recruuit.com</p>
-          <p>Phone: +123-456-7890</p>
-          <p>Address: 123 Main St, Anytown USA</p>
-        </section>
-      </main>
+      </div>
     </div>
-  )
+  );
 }
 
-export default ContactUs
+export default ContactUs;
