@@ -11,6 +11,7 @@ import {
   EmailOtp,
   PhoneNbrVerify,
   ContactUs,
+  AboutUs,
   PhoneOtp,
   CompanyRegistration,
   CreateTest,
@@ -40,6 +41,7 @@ function App() {
           <Route path="/verifyYourPhoneNbr" exact element={<PhoneOtp />} />
           <Route path="/register" exact element={<Registration />} />
           <Route path="/contactUs" exact element={<ContactUs />} />
+          <Route path="/aboutUs" exact element={<AboutUs />} />
 
           <Route path="/test/createTest" exact element={<CreateTest />} />
           <Route path="/test/set-questions" exact element={<SetQuestions />} />

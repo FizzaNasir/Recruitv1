@@ -15,3 +15,4 @@ export { default as PostJob } from "./pages/postJob/PostJob";
 export { default as CompanyRegistration } from "./pages/RegisterCompany/RegisterCompany";
 export { default as Registration } from "./pages/Registration/Registration";
 export { default as Home } from "./pages/Home/Home";
+export { default as AboutUs } from "./pages/AboutUs/AboutUs";

@@ -1,10 +1,17 @@
-import styles from './Home.module.css'
-import Header from '../../components/Header/Header'
-import JobPost from '../../components/JobPostCard/JobPost'
-import bnr2 from './recruuit.jpg'
-import { Link } from 'react-router-dom'
+import styles from "./Home.module.css";
+import Header from "../../components/Header/Header";
+import JobPost from "../../components/JobPostCard/JobPost";
+import bnr2 from "./recruuit.jpg";
+import { Link } from "react-router-dom";
 
 function Home() {
+  const jobTitle = "Marketing Coordinator";
+  const companyName = "Recruuit (Pvt.) Ltd";
+  const location = "Lahore, Pakistan";
+  const jobType = "Part Time";
+  const jobMode = "Remote";
+  const salary = "$40,000 - $10000,000 / year";
+  const postTime = "Posted 11 months ago";
   return (
     // top banner
     <div className={styles.scrollableContainer}>
@@ -18,7 +25,7 @@ function Home() {
           Discover your dream job, Start your career journey with us!
         </p>
         {/* create account button */}
-        <a className={styles.transparentBtn} href='/signup'>
+        <a className={styles.transparentBtn} href="/signup">
           Create an Account
         </a>
       </div>
@@ -68,12 +75,12 @@ function Home() {
                 as possible.
               </p>
               <div className={styles.mg_30}>
-                <a className={styles.primaryBtn} href='#'>
+                <a className={styles.primaryBtn} href="#">
                   Learn more
                 </a>
               </div>
             </div>
-            <img className={styles.about_pic} src={bnr2} alt='img' />
+            <img className={styles.about_pic} src={bnr2} alt="img" />
           </div>
         </div>
         <div className={styles.container}>
@@ -81,18 +88,50 @@ function Home() {
             Recent Jobs
           </h2>
           <div>
-            <JobPost />
-            <JobPost />
-            <JobPost />
-            <JobPost />
+            <JobPost
+              jobTitle={jobTitle}
+              companyName={companyName}
+              location={location}
+              jobMode={jobMode}
+              jobType={jobType}
+              salary={salary}
+              postTime={postTime}
+            />
+            <JobPost
+              jobTitle={jobTitle}
+              companyName={companyName}
+              location={location}
+              jobMode={jobMode}
+              jobType={jobType}
+              salary={salary}
+              postTime={postTime}
+            />
+            <JobPost
+              jobTitle={jobTitle}
+              companyName={companyName}
+              location={location}
+              jobMode={jobMode}
+              jobType={jobType}
+              salary={salary}
+              postTime={postTime}
+            />
+            <JobPost
+              jobTitle={jobTitle}
+              companyName={companyName}
+              location={location}
+              jobMode={jobMode}
+              jobType={jobType}
+              salary={salary}
+              postTime={postTime}
+            />
           </div>
-          <a className={styles.primaryBtn} href='#'>
+          <a className={styles.primaryBtn} href="#">
             Browse All Jobs
           </a>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Home
+export default Home;
