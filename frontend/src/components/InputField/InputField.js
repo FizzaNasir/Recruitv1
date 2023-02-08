@@ -1,11 +1,11 @@
-import "./InputField.css";
+import './InputField.css'
 export default function InputField(props) {
-  const { Variant } = props;
+  const { Variant } = props
   return (
     <label>
-      {props.type === "textarea" ? (
+      {props.type === 'textarea' ? (
         <textarea
-          style={{ appearance: "none", "-webkit-appearance": "none" }}
+          style={{ appearance: 'none', '-webkit-appearance': 'none' }}
           required
           maxLength={props.MaxLength}
           placeholder={props.Placeholder}
@@ -15,12 +15,12 @@ export default function InputField(props) {
           data-next={props.DataNext}
           data-previous={props.DataPrevious}
           onChange={props.handleChangestate}
-          className={["input", "textarea", Variant].join(" ")}
+          className={['input', 'textarea', Variant].join(' ')}
         ></textarea>
       ) : (
         <input
-          type="input"
-          style={{ appearance: "none", "-webkit-appearance": "none" }}
+          type={props.Type}
+          style={{ appearance: 'none', '-webkit-appearance': 'none' }}
           required
           maxLength={props.MaxLength}
           placeholder={props.Placeholder}
@@ -30,9 +30,9 @@ export default function InputField(props) {
           data-next={props.DataNext}
           data-previous={props.DataPrevious}
           onChange={props.handleChangestate}
-          className={["input", Variant].join(" ")}
+          className={['input', Variant].join(' ')}
         />
       )}
     </label>
-  );
+  )
 }

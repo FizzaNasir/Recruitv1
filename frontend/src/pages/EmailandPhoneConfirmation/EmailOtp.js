@@ -69,8 +69,8 @@ const EmailOtp = () => {
               Name='Digit_1'
               DataNext='Digit-2'
               handleChangestate={handleChange}
-              MaxLength="1"
-              Variant="inputVariantOne"
+              MaxLength='1'
+              Variant='inputVariantOne'
             />
             <InputField
               Value={Digit_2}
@@ -79,8 +79,8 @@ const EmailOtp = () => {
               DataNext='Digit-3'
               DataPrevious='Digit-1'
               handleChangestate={handleChange}
-              MaxLength="1"
-              Variant="inputVariantOne"
+              MaxLength='1'
+              Variant='inputVariantOne'
             />
             <InputField
               Value={Digit_3}
@@ -89,8 +89,8 @@ const EmailOtp = () => {
               DataNext='Digit-4'
               DataPrevious='Digit-2'
               handleChangestate={handleChange}
-              MaxLength="1"
-              Variant="inputVariantOne"
+              MaxLength='1'
+              Variant='inputVariantOne'
             />
             <InputField
               Value={Digit_4}
@@ -98,15 +98,15 @@ const EmailOtp = () => {
               Name='Digit_4'
               DataPrevious='Digit-3'
               handleChangestate={handleChange}
-              MaxLength="1"
-              Variant="inputVariantOne"
+              MaxLength='1'
+              Variant='inputVariantOne'
             />
           </div>
           <Button
             Type='submit'
-            Variant="btnVariantTwo"
+            Variant='btnVariantTwo'
             HandleClick={handleSubmit}
-            Title= "Send"
+            Title='Send'
           />
         </div>
         {error && <div className={styles.error_msg}>{error}</div>}

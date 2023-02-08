@@ -1,28 +1,28 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
-import { X } from 'react-feather';
-import InputControl from '../InputControl/InputControl';
-import styles from './CV.module.css';
-import {register} from '../../../util/api-call'
-import { useNavigate } from 'react-router-dom';
+import React from 'react'
+import { useState, useEffect } from 'react'
+import { X } from 'react-feather'
+import InputControl from '../InputControl/InputControl'
+import styles from './CV.module.css'
+import { register } from '../../../util/api-call'
+import { useNavigate } from 'react-router-dom'
 
 const CV = (props) => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   // Props
-  const sections = props.sections;
-  const information = props.information;
+  const sections = props.sections
+  const information = props.information
   //States
-  const [activeDetailIndex, setActiveDetailIndex] = useState(0);
+  const [activeDetailIndex, setActiveDetailIndex] = useState(0)
   const [sectionTitle, setSectionTitle] = useState(
     sections[Object.keys(sections)[0]]
-  );
+  )
 
   const [activeInformation, setActiveInformation] = useState(
     information[sections[Object.keys(sections)[0]]]
-  );
+  )
   const [activeSectionKey, setActiveSectionKey] = useState(
     Object.keys(sections)[0]
-  );
+  )
   const [values, setValues] = useState({
     name: activeInformation?.detail?.name || '',
     title: activeInformation?.detail?.title || '',
@@ -30,7 +30,7 @@ const CV = (props) => {
     city: activeInformation?.detail?.city || '',
     phone: activeInformation?.detail?.phone || '',
     email: activeInformation?.detail?.email || '',
-  });
+  })
 
   const [submissionData, setSubmissionData] = useState({
     name: '',
@@ -46,22 +46,22 @@ const CV = (props) => {
       achievement: [],
       other: {},
     },
-  });
+  })
   // Bodies
   const workExpBody = (
     <div className={styles.detail}>
       <div className={styles.row}>
         <InputControl
-          label="Title"
-          placeholder="Enter title eg. Frontend developer"
+          label='Title'
+          placeholder='Enter title eg. Frontend developer'
           value={values.title}
           onChange={(event) =>
             setValues((prev) => ({ ...prev, title: event.target.value }))
           }
         />
         <InputControl
-          label="Company Name"
-          placeholder="Enter company name eg. amazon"
+          label='Company Name'
+          placeholder='Enter company name eg. amazon'
           value={values.companyName}
           onChange={(event) =>
             setValues((prev) => ({ ...prev, companyName: event.target.value }))
@@ -70,8 +70,8 @@ const CV = (props) => {
       </div>
       <div className={styles.row}>
         <InputControl
-          label="Certificate Link"
-          placeholder="Enter certificate link"
+          label='Certificate Link'
+          placeholder='Enter certificate link'
           value={values.certificationLink}
           onChange={(event) =>
             setValues((prev) => ({
@@ -81,8 +81,8 @@ const CV = (props) => {
           }
         />
         <InputControl
-          label="Location"
-          placeholder="Enter location eg. Remote"
+          label='Location'
+          placeholder='Enter location eg. Remote'
           value={values.location}
           onChange={(event) =>
             setValues((prev) => ({ ...prev, location: event.target.value }))
@@ -91,18 +91,18 @@ const CV = (props) => {
       </div>
       <div className={styles.row}>
         <InputControl
-          label="Start Date"
-          type="date"
-          placeholder="Enter start date of work"
+          label='Start Date'
+          type='date'
+          placeholder='Enter start date of work'
           value={values.startDate}
           onChange={(event) =>
             setValues((prev) => ({ ...prev, startDate: event.target.value }))
           }
         />
         <InputControl
-          label="End Date"
-          type="date"
-          placeholder="Enter end date of work"
+          label='End Date'
+          type='date'
+          placeholder='Enter end date of work'
           value={values.endDate}
           onChange={(event) =>
             setValues((prev) => ({ ...prev, endDate: event.target.value }))
@@ -113,7 +113,7 @@ const CV = (props) => {
       <div className={styles.column}>
         <label>Enter work description</label>
         <InputControl
-          placeholder="Enter Description"
+          placeholder='Enter Description'
           value={values.description}
           onChange={(event) =>
             setValues((prev) => ({ ...prev, description: event.target.value }))
@@ -121,39 +121,39 @@ const CV = (props) => {
         />
       </div>
     </div>
-  );
+  )
   const projectBody = (
     <div className={styles.detail}>
       <div className={styles.row}>
         <InputControl
-          label="Title"
+          label='Title'
           value={values.title}
-          placeholder="Enter title eg. Chat app"
+          placeholder='Enter title eg. Chat app'
           onChange={(event) =>
             setValues((prev) => ({ ...prev, title: event.target.value }))
           }
         />
       </div>
       <InputControl
-        label="Overview"
+        label='Overview'
         value={values.overview}
-        placeholder="Enter basic overview of project"
+        placeholder='Enter basic overview of project'
         onChange={(event) =>
           setValues((prev) => ({ ...prev, overview: event.target.value }))
         }
       />
       <div className={styles.row}>
         <InputControl
-          label="Deployed Link"
+          label='Deployed Link'
           value={values.deployedLink}
-          placeholder="Enter deployed link of project"
+          placeholder='Enter deployed link of project'
           onChange={(event) =>
             setValues((prev) => ({ ...prev, deployedLink: event.target.value }))
           }
         />
         <InputControl
-          label="Project Link"
-          placeholder="Enter github link or other link of project"
+          label='Project Link'
+          placeholder='Enter github link or other link of project'
           value={values.projectLink}
           onChange={(event) =>
             setValues((prev) => ({ ...prev, projectLink: event.target.value }))
@@ -163,7 +163,7 @@ const CV = (props) => {
       <div className={styles.column}>
         <label>Enter project description</label>
         <InputControl
-          placeholder="Line 1"
+          placeholder='Line 1'
           value={values.description}
           onChange={(event) =>
             setValues((prev) => ({ ...prev, description: event.target.value }))
@@ -171,13 +171,13 @@ const CV = (props) => {
         />
       </div>
     </div>
-  );
+  )
   const educationBody = (
     <div className={styles.detail}>
       <div className={styles.row}>
         <InputControl
-          label="Title"
-          placeholder="Enter title eg. B-tech"
+          label='Title'
+          placeholder='Enter title eg. B-tech'
           value={values.title}
           onChange={(event) =>
             setValues((prev) => ({ ...prev, title: event.target.value }))
@@ -185,8 +185,8 @@ const CV = (props) => {
         />
       </div>
       <InputControl
-        label="Institution Name"
-        placeholder="Enter name of your University/college/school"
+        label='Institution Name'
+        placeholder='Enter name of your University/college/school'
         value={values.instituteName}
         onChange={(event) =>
           setValues((prev) => ({ ...prev, instituteName: event.target.value }))
@@ -194,18 +194,18 @@ const CV = (props) => {
       />
       <div className={styles.row}>
         <InputControl
-          label="Start Date"
-          type="date"
-          placeholder="Enter start date of this education"
+          label='Start Date'
+          type='date'
+          placeholder='Enter start date of this education'
           value={values.startDate}
           onChange={(event) =>
             setValues((prev) => ({ ...prev, startDate: event.target.value }))
           }
         />
         <InputControl
-          label="End Date"
-          type="date"
-          placeholder="Enter end date of this education"
+          label='End Date'
+          type='date'
+          placeholder='Enter end date of this education'
           value={values.endDate}
           onChange={(event) =>
             setValues((prev) => ({ ...prev, endDate: event.target.value }))
@@ -213,22 +213,22 @@ const CV = (props) => {
         />
       </div>
     </div>
-  );
+  )
   const basicInfoBody = (
     <div className={styles.detail}>
       <div className={styles.row}>
         <InputControl
-          label="Name"
-          placeholder="Enter your full name eg. Talha"
+          label='Name'
+          placeholder='Enter your full name eg. Talha'
           value={values.name}
           onChange={(event) =>
             setValues((prev) => ({ ...prev, name: event.target.value }))
           }
         />
         <InputControl
-          label="Title"
+          label='Title'
           value={values.title}
-          placeholder="Enter your title eg. Frontend developer"
+          placeholder='Enter your title eg. Frontend developer'
           onChange={(event) =>
             setValues((prev) => ({ ...prev, title: event.target.value }))
           }
@@ -236,16 +236,16 @@ const CV = (props) => {
       </div>
       <div className={styles.row}>
         <InputControl
-          label="Country"
-          placeholder="Enter your Country"
+          label='Country'
+          placeholder='Enter your Country'
           value={values.country}
           onChange={(event) =>
             setValues((prev) => ({ ...prev, country: event.target.value }))
           }
         />
         <InputControl
-          label="City"
-          placeholder="Enter your City"
+          label='City'
+          placeholder='Enter your City'
           value={values.city}
           onChange={(event) =>
             setValues((prev) => ({ ...prev, city: event.target.value }))
@@ -254,30 +254,30 @@ const CV = (props) => {
       </div>
       <div className={styles.row}>
         <InputControl
-          label="Email"
+          label='Email'
           value={values.email}
-          placeholder="Enter your email"
+          placeholder='Enter your email'
           onChange={(event) =>
             setValues((prev) => ({ ...prev, email: event.target.value }))
           }
         />
         <InputControl
-          label="Enter phone"
+          label='Enter phone'
           value={values.phone}
-          placeholder="Enter your phone number"
+          placeholder='Enter your phone number'
           onChange={(event) =>
             setValues((prev) => ({ ...prev, phone: event.target.value }))
           }
         />
       </div>
     </div>
-  );
+  )
   const achievementsBody = (
     <div className={styles.detail}>
       <div className={styles.row}>
         <InputControl
-          label="Title"
-          placeholder="Enter title eg. Frontend developer"
+          label='Title'
+          placeholder='Enter title eg. Frontend developer'
           value={values.title}
           onChange={(event) =>
             setValues((prev) => ({ ...prev, title: event.target.value }))
@@ -285,70 +285,70 @@ const CV = (props) => {
         />
       </div>
       <InputControl
-        label="Description"
-        placeholder="Enter Description"
+        label='Description'
+        placeholder='Enter Description'
         value={values.description}
         onChange={(event) =>
           setValues((prev) => ({ ...prev, description: event.target.value }))
         }
       />
     </div>
-  );
+  )
   const otherBody = (
     <div className={styles.detail}>
       <InputControl
-        label="Description"
-        placeholder="Enter your objective/summary"
+        label='Description'
+        placeholder='Enter your objective/summary'
         value={values.summary}
         onChange={(event) =>
           setValues((prev) => ({ ...prev, summary: event.target.value }))
         }
       />
       <InputControl
-        label="Courses"
-        placeholder="Enter something"
+        label='Courses'
+        placeholder='Enter something'
         value={values.courses}
         onChange={(event) =>
           setValues((prev) => ({ ...prev, courses: event.target.value }))
         }
       />
       <InputControl
-        label="Skills"
-        placeholder="Enter something"
+        label='Skills'
+        placeholder='Enter something'
         value={values.skills}
         onChange={(event) =>
           setValues((prev) => ({ ...prev, skills: event.target.value }))
         }
       />
       <InputControl
-        label="Links"
-        placeholder="Enter github, linkdn etc links"
+        label='Links'
+        placeholder='Enter github, linkdn etc links'
         value={values.otherLinks}
         onChange={(event) =>
           setValues((prev) => ({ ...prev, otherLinks: event.target.value }))
         }
       />
     </div>
-  );
+  )
   // Handlers
   const generateBody = () => {
     switch (sections[activeSectionKey]) {
       case sections.basicInfo:
-        return basicInfoBody;
+        return basicInfoBody
       case sections.workExp:
-        return workExpBody;
+        return workExpBody
       case sections.project:
-        return projectBody;
+        return projectBody
       case sections.education:
-        return educationBody;
+        return educationBody
       case sections.achievement:
-        return achievementsBody;
+        return achievementsBody
       case sections.other:
-        return otherBody;
+        return otherBody
       default:
-        return null;
+        return null
     }
-  };
+  }
   const handleSave = () => {
     switch (sections[activeSectionKey]) {
       case sections.basicInfo: {
@@ -359,7 +359,7 @@ const CV = (props) => {
           city: values.city,
           email: values.email,
           phone: values.phone,
-        };
+        }
 
         props.setInformation((prev) => ({
           ...prev,
@@ -368,8 +368,8 @@ const CV = (props) => {
             detail: tempDetail,
             sectionTitle,
           },
-        }));
-        break;
+        }))
+        break
       }
       case sections.workExp: {
         const tempDetail = {
@@ -380,9 +380,9 @@ const CV = (props) => {
           companyName: values.companyName,
           location: values.location,
           description: values.description,
-        };
-        const tempDetails = [...information[sections.workExp]?.details];
-        tempDetails[activeDetailIndex] = tempDetail;
+        }
+        const tempDetails = [...information[sections.workExp]?.details]
+        tempDetails[activeDetailIndex] = tempDetail
 
         props.setInformation((prev) => ({
           ...prev,
@@ -391,8 +391,8 @@ const CV = (props) => {
             details: tempDetails,
             sectionTitle,
           },
-        }));
-        break;
+        }))
+        break
       }
       case sections.project: {
         const tempDetail = {
@@ -401,9 +401,9 @@ const CV = (props) => {
           overview: values.overview,
           projectLink: values.projectLink,
           description: values.description,
-        };
-        const tempDetails = [...information[sections.project]?.details];
-        tempDetails[activeDetailIndex] = tempDetail;
+        }
+        const tempDetails = [...information[sections.project]?.details]
+        tempDetails[activeDetailIndex] = tempDetail
 
         props.setInformation((prev) => ({
           ...prev,
@@ -412,8 +412,8 @@ const CV = (props) => {
             details: tempDetails,
             sectionTitle,
           },
-        }));
-        break;
+        }))
+        break
       }
       case sections.education: {
         const tempDetail = {
@@ -421,9 +421,9 @@ const CV = (props) => {
           instituteName: values.instituteName,
           startDate: values.startDate,
           endDate: values.endDate,
-        };
-        const tempDetails = [...information[sections.education]?.details];
-        tempDetails[activeDetailIndex] = tempDetail;
+        }
+        const tempDetails = [...information[sections.education]?.details]
+        tempDetails[activeDetailIndex] = tempDetail
 
         props.setInformation((prev) => ({
           ...prev,
@@ -432,16 +432,16 @@ const CV = (props) => {
             details: tempDetails,
             sectionTitle,
           },
-        }));
-        break;
+        }))
+        break
       }
       case sections.achievement: {
         const tempDetail = {
           title: values.title,
           description: values.description,
-        };
-        const tempDetails = [...information[sections.achievement]?.details];
-        tempDetails[activeDetailIndex] = tempDetail;
+        }
+        const tempDetails = [...information[sections.achievement]?.details]
+        tempDetails[activeDetailIndex] = tempDetail
 
         props.setInformation((prev) => ({
           ...prev,
@@ -450,8 +450,8 @@ const CV = (props) => {
             details: tempDetails,
             sectionTitle,
           },
-        }));
-        break;
+        }))
+        break
       }
       case sections.other: {
         const tempDetail = {
@@ -459,7 +459,7 @@ const CV = (props) => {
           skills: values.skills,
           summary: values.summary,
           otherLinks: values.otherLinks,
-        };
+        }
 
         props.setInformation((prev) => ({
           ...prev,
@@ -468,19 +468,19 @@ const CV = (props) => {
             detail: tempDetail,
             sectionTitle,
           },
-        }));
-        break;
+        }))
+        break
       }
       default:
-        return null;
+        return null
     }
-  };
+  }
   const handleAddNew = () => {
-    const details = activeInformation?.details;
-    if (!details) return;
-    const lastDetail = details.slice(-1)[0];
-    if (!Object.keys(lastDetail).length) return;
-    details?.push({});
+    const details = activeInformation?.details
+    if (!details) return
+    const lastDetail = details.slice(-1)[0]
+    if (!Object.keys(lastDetail).length) return
+    details?.push({})
 
     props.setInformation((prev) => ({
       ...prev,
@@ -488,38 +488,38 @@ const CV = (props) => {
         ...information[sections[activeSectionKey]],
         details: details,
       },
-    }));
-    setActiveDetailIndex(details?.length - 1);
-  };
+    }))
+    setActiveDetailIndex(details?.length - 1)
+  }
   const handleDeleteDetail = (index) => {
     const details = activeInformation?.details
       ? [...activeInformation?.details]
-      : '';
-    if (!details) return;
-    details.splice(index, 1);
+      : ''
+    if (!details) return
+    details.splice(index, 1)
     props.setInformation((prev) => ({
       ...prev,
       [sections[activeSectionKey]]: {
         ...information[sections[activeSectionKey]],
         details: details,
       },
-    }));
+    }))
 
-    setActiveDetailIndex((prev) => (prev === index ? 0 : prev - 1));
-  };
+    setActiveDetailIndex((prev) => (prev === index ? 0 : prev - 1))
+  }
   const handleSubmit = async () => {
     console.log(submissionData)
     const res = await register(submissionData)
     if (res) {
       navigate('/dashboard')
     }
-  };
+  }
   // setting values
   useEffect(() => {
-    const activeInfo = information[sections[activeSectionKey]];
-    setActiveInformation(activeInfo);
-    setSectionTitle(sections[activeSectionKey]);
-    setActiveDetailIndex(0);
+    const activeInfo = information[sections[activeSectionKey]]
+    setActiveInformation(activeInfo)
+    setSectionTitle(sections[activeSectionKey])
+    setActiveDetailIndex(0)
     setValues({
       name: activeInfo?.detail?.name || '',
       overview: activeInfo?.details
@@ -562,11 +562,11 @@ const CV = (props) => {
       skills: activeInfo?.detail?.skills || '',
       summary: activeInfo?.detail?.summary || '',
       otherLinks: activeInfo?.detail?.otherLinks || '',
-    });
-  }, [activeSectionKey]);
+    })
+  }, [activeSectionKey])
 
   useEffect(() => {
-    setActiveInformation(information[sections[activeSectionKey]]);
+    setActiveInformation(information[sections[activeSectionKey]])
     setSubmissionData({
       name: information[sections.basicInfo]?.detail?.name || '',
       title: information[sections.basicInfo]?.detail?.title || '',
@@ -582,13 +582,13 @@ const CV = (props) => {
         other: information[sections.other]?.detail || {},
       },
     })
-  }, [information]);
+  }, [information])
 
   useEffect(() => {
-    const details = activeInformation?.details;
-    if (!details) return;
+    const details = activeInformation?.details
+    if (!details) return
 
-    const activeInfo = information[sections[activeSectionKey]];
+    const activeInfo = information[sections[activeSectionKey]]
     setValues({
       overview: activeInfo.details[activeDetailIndex]?.overview || '',
       link: activeInfo.details[activeDetailIndex]?.link || '',
@@ -603,8 +603,8 @@ const CV = (props) => {
       projectLink: activeInfo.details[activeDetailIndex]?.projectLink || '',
       instituteName: activeInfo.details[activeDetailIndex]?.instituteName || '',
       description: activeInfo.details[activeDetailIndex]?.description || '',
-    });
-  }, [activeDetailIndex]);
+    })
+  }, [activeDetailIndex])
   // Form Front-End
   return (
     <div className={styles.container}>
@@ -638,8 +638,8 @@ const CV = (props) => {
                   </p>
                   <X
                     onClick={(event) => {
-                      event.stopPropagation();
-                      handleDeleteDetail(index);
+                      event.stopPropagation()
+                      handleDeleteDetail(index)
                     }}
                   />
                 </div>
@@ -677,6 +677,6 @@ const CV = (props) => {
         )}
       </div>
     </div>
-  );
-};
-export default CV;
+  )
+}
+export default CV

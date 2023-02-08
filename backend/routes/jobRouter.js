@@ -6,6 +6,8 @@ const authController = require('../controllers/authController');
 const router = express.Router();
 
 router.post('/createJob', jobController.createJob);
+router.get('/getAllJobs', jobController.getAllJobs);
+
 
 
 //router.get('/getJobs', jobController.getJobs);

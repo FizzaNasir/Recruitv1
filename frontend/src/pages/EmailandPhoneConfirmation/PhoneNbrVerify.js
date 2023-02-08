@@ -1,15 +1,15 @@
 import { useState } from 'react'
 import styles from './styles.module.css'
-import { storeObject } from '../../store/actions'
-import { useDispatch } from 'react-redux'
+import { useEffect } from 'react'
 import Header from '../../components/Header/Header'
 import { useNavigate } from 'react-router'
-import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth'
+import {
+  getAuth,
+  RecaptchaVerifier,
+  signInWithPhoneNumber,
+} from 'firebase/auth'
 import { auth } from '../../util/firebase'
-import Button from '../../components/Button/Button'
-import InputField from '../../components/InputField/InputField'
 
-import { objActions } from '../../store/reduxStore'
 export default function Phone_validation() {
   // State for Phone Number
   const [phone, setphone] = useState({
@@ -33,8 +33,7 @@ export default function Phone_validation() {
       document.querySelector('[name="number"]').focus()
     }
   }
-
-  // function for showing the recaptcha before sending otp code
+  // function
   const configureCaptcha = (phoneNbr) => {
     console.log(auth)
     // set new recaptcha verifier window property
@@ -48,22 +47,24 @@ export default function Phone_validation() {
     return signInWithPhoneNumber(auth, phoneNbr, recaptchaVerifier)
   }
 
-  // function for sending the otp code to phone Number
+  // function for handling the button click
   async function sendOtp() {
     // if all the fields are filled then sum up the Number
     const { CountryCode, SimCode, number } = phone
     const PhoneNumber = CountryCode + SimCode + number
+    console.log(PhoneNumber)
 
+    console.log('first')
     try {
       const res = await configureCaptcha(PhoneNumber)
       console.log(res)
-      objActions.save(res)
+      localStorage.setItem('confirmationResult', JSON.stringify(res))
       navigate('/verifyYourPhoneNbr')
     } catch (err) {
       console.log(err)
     }
   }
-
+  const verifyOtp = async (phoneNbr) => {}
   return (
     <>
       <Header />
@@ -74,45 +75,41 @@ export default function Phone_validation() {
             Enter your Phone Number for verification
           </p>
           <div>
-            <InputField
-              Type='text'
-              Id='Ccode'
-              ClassName={styles.input}
-              Name='CountryCode'
-              Value={phone.CountryCode}
-              MaxLength='10'
-              DataNext='SimCode'
-              // Variant="inputVariantOne"
+            <input
+              type='text'
+              id='Ccode'
+              className={styles.input}
+              name='CountryCode'
+              value={phone.CountryCode}
+              maxLength='10'
+              data-next='SimCode'
             />
-            <InputField
-              Type='number'
-              ClassName={styles.simCode}
-              Name='SimCode'
-              DataNext='number'
-              Value={phone.SimCode}
-              handleChangestate={handleChange}
-              MaxLength='3'
-              // Variant="inputVariantOne"
+            <input
+              type='number'
+              className={styles.simCode}
+              name='SimCode'
+              data-next='number'
+              value={phone.SimCode}
+              onChange={handleChange}
+              maxLength='3'
             />
 
-            <InputField
-              Type='number'
-              ClassName={styles.number}
-              Name='number'
-              Value={phone.number}
-              handleChangestate={handleChange}
-              MaxLength='7'
-              // Variant="inputVariantOne"
+            <input
+              type='number'
+              className={styles.number}
+              name='number'
+              value={phone.number}
+              onChange={handleChange}
+              maxLength='7'
             />
             <div id='recaptcha-container' className={styles.recaptcha}></div>
-            <Button
-              Id='sign-in-button'
-              Variant="btnVariantTwo"
-              HandleClick={sendOtp}
-              Title="Send Code"
-              
-            />
-            
+            <button
+              id='sign-in-button'
+              className={styles.send_btn}
+              onClick={sendOtp}
+            >
+              Send Code
+            </button>
           </div>
         </div>
       </div>
