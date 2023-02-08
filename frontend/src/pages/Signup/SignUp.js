@@ -39,7 +39,7 @@ const Signup = () => {
     }
 
     if (password !== passwordConfirm) {
-      setError('Password  s do not match')
+      setError('Passwords do not match')
       return
     }
     const res = await signUp({ name, email, password, passwordConfirm })

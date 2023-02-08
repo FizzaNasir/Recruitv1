@@ -39,7 +39,7 @@ const jobSchema = new mongoose.Schema({
     test: {
         type: mongoose.Schema.ObjectId,
         ref: 'Test'
-        },
+       },
     
 });
     

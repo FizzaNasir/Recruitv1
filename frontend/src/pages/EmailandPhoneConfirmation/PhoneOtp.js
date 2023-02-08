@@ -77,61 +77,66 @@ const PhoneOtp = () => {
               Id='Digit-1'
               Name='Digit_1'
               DataNext='Digit-2'
+              DataPrevious='Digit-1'
               handleChangestate={handleChange}
-              Variant="inputVariantOne"
-
+              MaxLength='1'
+              Variant='inputVariantOne'
             />
             <InputField
               Value={Digit_2}
               Id='Digit-2'
               Name='Digit_2'
+              MaxLength='1'
               DataNext='Digit-3'
               DataPrevious='Digit-1'
               handleChangestate={handleChange}
-              Variant="inputVariantOne"
+              Variant='inputVariantOne'
             />
             <InputField
               Value={Digit_3}
               Id='Digit-3'
+              MaxLength='1'
               Name='Digit_3'
               DataNext='Digit-4'
               DataPrevious='Digit-2'
               handleChangestate={handleChange}
-              Variant="inputVariantOne"
+              Variant='inputVariantOne'
             />
             <InputField
               Value={Digit_4}
               Id='Digit-4'
+              MaxLength='1'
               Name='Digit_4'
               DataPrevious='Digit-3'
               DataNext='Digit-5'
               handleChangestate={handleChange}
-              Variant="inputVariantOne"
+              Variant='inputVariantOne'
             />
             <InputField
               Value={Digit_5}
               Id='Digit-5'
+              MaxLength='1'
               Name='Digit_5'
               DataNext='Digit-6'
               handleChangestate={handleChange}
-              Variant="inputVariantOne"
+              Variant='inputVariantOne'
             />
             <InputField
               Value={Digit_6}
               Id='Digit-6'
+              MaxLength='1'
               Name='Digit_6'
               DataPrevious='Digit-5'
               handleChangestate={handleChange}
-              Variant="inputVariantOne"
+              Variant='inputVariantOne'
             />
           </div>
           <Button
             Type='submit'
-            Variant="btnVariantTwo"
+            Variant='btnVariantTwo'
             HandleClick={handleSubmit}
-            Title="Submit"
+            Title='Submit'
           />
-         
         </div>
         {error && <div className={styles.error_msg}>{error}</div>}
       </div>

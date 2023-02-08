@@ -40,3 +40,15 @@ exports.createJob = catchAsync(async (req, res, next) => {
         }
     });
 });
+
+exports.getAllJobs = catchAsync(async (req, res, next) => {
+    const jobs = await Job.find();
+    res.status(200).json({
+        status: 'success',
+        results: jobs.length,
+        data: {
+            jobs
+        }
+    });
+}
+);
