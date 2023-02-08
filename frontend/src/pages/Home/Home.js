@@ -3,16 +3,18 @@ import Header from "../../components/Header/Header";
 import JobPost from "../../components/JobPostCard/JobPost";
 import bnr2 from "./recruuit.jpg";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getAllJobs } from "../../store/reduxStore";
 
 function Home() {
-  const jobTitle = "Marketing Coordinator";
-  const companyName = "Recruuit (Pvt.) Ltd";
-  const location = "Lahore, Pakistan";
-  const jobType = "Part Time";
-  const jobMode = "Remote";
-  const salary = "$40,000 - $10000,000 / year";
-  const postTime = "Posted 11 months ago";
-  const companyProfile = "./recruuit";
+  const { isLoading, jobs } = useSelector((state) => state.jobs);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllJobs());
+  }, []);
+
   return (
     // top banner
     <div className={styles.scrollableContainer}>
@@ -84,56 +86,34 @@ function Home() {
             <img className={styles.about_pic} src={bnr2} alt="img" />
           </div>
         </div>
-        <div className={styles.container}>
-          <h2 className={`${styles.btm_line} ${styles.main_heading}`}>
-            Recent Jobs
-          </h2>
-          <div>
-            <JobPost
-              jobTitle={jobTitle}
-              companyName={companyName}
-              companyProfile={companyProfile}
-              location={location}
-              jobMode={jobMode}
-              jobType={jobType}
-              salary={salary}
-              postTime={postTime}
-            />
-            <JobPost
-              jobTitle={jobTitle}
-              companyName={companyName}
-              companyProfile={companyProfile}
-              location={location}
-              jobMode={jobMode}
-              jobType={jobType}
-              salary={salary}
-              postTime={postTime}
-            />
-            <JobPost
-              jobTitle={jobTitle}
-              companyName={companyName}
-              companyProfile={companyProfile}
-              location={location}
-              jobMode={jobMode}
-              jobType={jobType}
-              salary={salary}
-              postTime={postTime}
-            />
-            <JobPost
-              jobTitle={jobTitle}
-              companyName={companyName}
-              companyProfile={companyProfile}
-              location={location}
-              jobMode={jobMode}
-              jobType={jobType}
-              salary={salary}
-              postTime={postTime}
-            />
+
+        {isLoading ? (
+          <p>Loading ...</p>
+        ) : (
+          <div className={styles.container}>
+            <h2 className={`${styles.btm_line} ${styles.main_heading}`}>
+              Recent Jobs
+            </h2>
+            {jobs.map((job) => (
+              <JobPost
+                key={job._id}
+                jobTitle={job.title}
+                // companyName={companyName}
+                // companyProfile={companyProfile}
+                location={job.location}
+                jobMode={job.mode}
+                jobType={job.type}
+                salary={job.salaryRange}
+                postTime={job.datePosted}
+                id={job._id}
+              />
+            ))}
+
+            <a className={styles.primaryBtn} href="jobListing">
+              Browse All Jobs
+            </a>
           </div>
-          <a className={styles.primaryBtn} href="jobListing">
-            Browse All Jobs
-          </a>
-        </div>
+        )}
       </div>
     </div>
   );

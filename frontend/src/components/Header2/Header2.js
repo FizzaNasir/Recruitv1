@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./style";
-const Header = () => {
+const Header2 = ({ onSearch }) => {
   return (
     <header style={styles.header}>
       <h1 style={styles.title}>
@@ -11,6 +11,11 @@ const Header = () => {
       </h1>
       <nav>
         <ul style={styles.navList}>
+          <form style={styles.navItem}>
+            <input type="text" placeholder="Search" />
+            <button type="submit">Search</button>
+          </form>
+
           <li style={styles.navItem}>
             <Link to="/dashboard" style={styles.navLink}>
               Home
@@ -32,4 +37,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Header2;

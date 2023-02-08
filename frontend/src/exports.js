@@ -15,6 +15,6 @@ export { default as PostJob } from "./pages/postJob/PostJob";
 export { default as CompanyRegistration } from "./pages/RegisterCompany/RegisterCompany";
 export { default as Registration } from "./pages/Registration/Registration";
 export { default as Home } from "./pages/Home/Home";
-export { default as Search } from "./pages/Search/Search";
+export { default as JobListing } from "./pages/JobListing/JobListing";
 export { default as JobDescription } from "./pages/JobDescription/JobDescription";
 export { default as AboutUs } from "./pages/AboutUs/AboutUs";
