@@ -19,6 +19,8 @@ import {
   PostJob,
   Home,
   Registration,
+  Search,
+  JobDescription,
 } from "./exports";
 
 function App() {
@@ -46,6 +48,8 @@ function App() {
           <Route path="/test/createTest" exact element={<CreateTest />} />
           <Route path="/test/set-questions" exact element={<SetQuestions />} />
           <Route path="/postJob" exact element={<PostJob />} />
+          <Route path="/search" exact element={<Search />} />
+          <Route path="/jobDescription" exact element={<JobDescription />} />
 
           {/* for page after skiping */}
           {/* <Route path='/PhoneNbrVerify' exact element={<PhoneNbrVerify />} /> */}

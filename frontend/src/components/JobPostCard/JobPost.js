@@ -3,6 +3,7 @@ import styles from "./JobPost.module.css";
 function JobPost({
   jobTitle,
   companyName,
+  companyProfile,
   location,
   jobType,
   jobMode,
@@ -13,13 +14,13 @@ function JobPost({
     <div className={styles.jobs_container}>
       <a href="./jobDescription">
         <div className={styles.jobs_wrapper}>
-          <div className={styles.jobs_client}>
+          {/* <div className={styles.jobs_client}>
             <img src="" alt="not found" />
-          </div>
+          </div> */}
           <div className={styles.jobs_content}>
             <h4 className={styles.job_title}> {jobTitle}</h4>
             <div className={styles.sub_category}>
-              <a className={styles.link} href="#">
+              <a className={styles.link} href={companyProfile}>
                 {companyName}
               </a>
             </div>
@@ -57,8 +58,8 @@ function JobPost({
                 </svg>
                 <span>{salary}</span>
               </p>
-              <p>{postTime}</p>
             </div>
+            <p>{postTime}</p>
           </div>
         </div>
       </a>

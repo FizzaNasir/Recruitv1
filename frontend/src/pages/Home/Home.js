@@ -12,6 +12,7 @@ function Home() {
   const jobMode = "Remote";
   const salary = "$40,000 - $10000,000 / year";
   const postTime = "Posted 11 months ago";
+  const companyProfile = "./recruuit";
   return (
     // top banner
     <div className={styles.scrollableContainer}>
@@ -91,6 +92,7 @@ function Home() {
             <JobPost
               jobTitle={jobTitle}
               companyName={companyName}
+              companyProfile={companyProfile}
               location={location}
               jobMode={jobMode}
               jobType={jobType}
@@ -100,6 +102,7 @@ function Home() {
             <JobPost
               jobTitle={jobTitle}
               companyName={companyName}
+              companyProfile={companyProfile}
               location={location}
               jobMode={jobMode}
               jobType={jobType}
@@ -109,6 +112,7 @@ function Home() {
             <JobPost
               jobTitle={jobTitle}
               companyName={companyName}
+              companyProfile={companyProfile}
               location={location}
               jobMode={jobMode}
               jobType={jobType}
@@ -118,6 +122,7 @@ function Home() {
             <JobPost
               jobTitle={jobTitle}
               companyName={companyName}
+              companyProfile={companyProfile}
               location={location}
               jobMode={jobMode}
               jobType={jobType}
@@ -125,7 +130,7 @@ function Home() {
               postTime={postTime}
             />
           </div>
-          <a className={styles.primaryBtn} href="#">
+          <a className={styles.primaryBtn} href="jobListing">
             Browse All Jobs
           </a>
         </div>
