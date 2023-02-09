@@ -26,7 +26,10 @@ const DashBoard = () => {
         <button className={styles.button} onClick={() => navigate('/profile')}>
           Profile
         </button>
-        <button className={styles.button} onClick={() => navigate('/jobs')}>
+        <button
+          className={styles.button}
+          onClick={() => navigate('/JobListing')}
+        >
           Browse All Jobs
         </button>
       </div>
