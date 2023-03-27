@@ -1,5 +1,5 @@
-import { useState } from "react";
-import "./Button.css";
+import { useState } from 'react'
+import './Button.css'
 export default function Button({
   Variant,
   Name,
@@ -13,10 +13,10 @@ export default function Button({
       name={Name}
       type={Type}
       id={Id}
-      className={["btn", Variant].join(" ")}
+      className={['btn', Variant].join(' ')}
       onClick={HandleClick}
     >
       {Title}
     </button>
-  );
+  )
 }
