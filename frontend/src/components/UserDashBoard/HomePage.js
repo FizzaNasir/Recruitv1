@@ -68,10 +68,12 @@ const HomePage = () => (
     >
       <Typography.Title level={3}>Recent Jobs</Typography.Title>
       <Row className={styles.jobsCards}>
-        <Card title='Devsinc' className={styles.card}>
-          <Typography.Title level={4}>Job Title</Typography.Title>
-          <Typography.Text>Location</Typography.Text>
-        </Card>
+        <Link to='/jobDescription/123'>
+          <Card title='Devsinc' className={styles.card}>
+            <Typography.Title level={4}>Job Title</Typography.Title>
+            <Typography.Text>Location</Typography.Text>
+          </Card>
+        </Link>
         <Card title='Devsinc' className={styles.card}>
           <Typography.Title level={4}>Job Title</Typography.Title>
           <Typography.Text>Location</Typography.Text>
@@ -130,9 +132,11 @@ const HomePage = () => (
           <Meta title='DevSinc' description='www.devsinc.com' />
         </Card>
 
-        <Button type='primary' style={{ margin: '0 20px' }} size='large'>
-          View All
-        </Button>
+        <Link to='/user/dashboard/companies'>
+          <Button type='primary' style={{ margin: '0 20px' }} size='large'>
+            View All
+          </Button>
+        </Link>
       </Space>
     </Space>
   </Space>

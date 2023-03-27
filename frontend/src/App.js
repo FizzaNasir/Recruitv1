@@ -22,6 +22,7 @@ import {
   JobListing,
   JobDescription,
   Quiz,
+  CompanyView,
 } from './exports'
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
       <CssBaseline />
       <StyledEngineProvider>
         <Routes>
+          {/* User Routes */}
           <Route path='/signup' exact element={<Signup />} />
           <Route path='/login' exact element={<Login />} />
           <Route path='/resetPwd' exact element={<ResetPwd />} />
@@ -41,6 +43,8 @@ function App() {
             exact
             element={<PhoneNbrVerify state />}
           />
+          <Route path='/user/:id' exact element={<Profile />} />
+
           <Route path='/verifyYourPhoneNbr' exact element={<PhoneOtp />} />
           <Route path='/register' exact element={<Registration />} />
           <Route path='/contactUs' exact element={<ContactUs />} />
@@ -51,11 +55,16 @@ function App() {
           <Route path='/postJob' exact element={<PostJob />} />
           <Route path='/JobListing' exact element={<JobListing />} />
           <Route path='/takeTest' exact element={<Quiz />} />
-          <Route path='/jobDescription' exact element={<JobDescription />} />
+          <Route
+            path='/jobDescription/:id'
+            exact
+            element={<JobDescription />}
+          />
 
           {/* for page after skiping */}
           {/* <Route path='/PhoneNbrVerify' exact element={<PhoneNbrVerify />} /> */}
-          <Route path='/user/12343' exact element={<Profile />} />
+          <Route path='/company/:id' exact element={<CompanyView />} />
+
           <Route path='/home' exact element={<Home />} />
           <Route path='/' exact element={<Navigate replace to='/login' />} />
           <Route path='*' exact element={<ErrorPage />} />

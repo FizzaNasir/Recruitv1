@@ -80,6 +80,15 @@ const ReviewPage = () => {
           </Form.Item>
         </Col>
         <Col>
+          <Typography.Title level={5}>Review Title</Typography.Title>
+          <Form.Item
+            name='reviewTitle'
+            rules={[{ required: true, message: 'Please enter a review title' }]}
+          >
+            <Input />
+          </Form.Item>
+        </Col>
+        <Col>
           <Typography.Title level={5}>Review Description</Typography.Title>
           <Form.Item
             name='reviewDescription'

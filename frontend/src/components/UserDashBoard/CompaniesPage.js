@@ -13,8 +13,7 @@ import {
 } from 'antd'
 import styles from './DashBoard.module.css'
 import CompanyImage from '../../assests/company.jpg'
-import companyLogo from '../../assests/devsinc.png'
-import { width } from '@mui/system'
+import ComapnyCard from './CompanyCard'
 
 const { Option } = Select
 
@@ -27,61 +26,6 @@ const data = [
 ]
 const { Meta } = Card
 
-const ComapnyCard = () => {
-  return (
-    <Col
-      className={styles.companyView}
-      onClick={() => {
-        console.log('clicked')
-      }}
-    >
-      <Row
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}
-      >
-        <Row
-          style={{
-            display: 'flex',
-            justifyContent: 'space-around',
-            alignItems: 'center',
-            gap: 16,
-          }}
-        >
-          <Image
-            style={{ width: '100px', height: '100px' }}
-            src={companyLogo}
-            alt='image'
-          />
-          <Typography.Title level={2}>Devsinc</Typography.Title>
-        </Row>
-        <Rate value={4} disabled style={{ fontSize: 30 }} />
-      </Row>
-      <Row
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}
-      >
-        <Col>
-          <Typography.Title level={4}>Location</Typography.Title>
-          <Typography.Title level={5}>New York</Typography.Title>
-        </Col>
-        <Col>
-          <Typography.Title level={4}>Size</Typography.Title>
-          <Typography.Title level={5}>100</Typography.Title>
-        </Col>
-        <Col>
-          <Typography.Title level={4}>Since</Typography.Title>
-          <Typography.Title level={5}>2019</Typography.Title>
-        </Col>
-      </Row>
-    </Col>
-  )
-}
 const CompanyBanner = () => {
   return (
     <Space
@@ -178,9 +122,7 @@ const CompanyList = () => {
           <Option value={4}>4 stars or above</Option>
           <Option value={5}>5 stars</Option>
         </Select>
-        <Button type='primary' size='large'>
-          Filter
-        </Button>
+        <Button type='primary'>Filter</Button>
       </div>
       <Typography.Title level={3}>Registered Companies</Typography.Title>
       <Space direction='vertical' style={{ width: '100%' }}>
