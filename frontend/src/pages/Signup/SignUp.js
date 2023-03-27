@@ -4,6 +4,7 @@ import styles from './SignUp.module.css'
 import Header from '../../components/Header/Header'
 import { signUp } from '../../util/api-call'
 import { EmailOtp } from '../EmailandPhoneConfirmation/EmailOtp'
+import NavBar from '../../components/Navbar/NavBar'
 
 const Signup = () => {
   const [data, setData] = useState({

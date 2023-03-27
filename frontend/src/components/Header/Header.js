@@ -12,7 +12,7 @@ const Header = () => {
       <nav>
         <ul style={styles.navList}>
           <li style={styles.navItem}>
-            <Link to='/dashboard' style={styles.navLink}>
+            <Link to='user/dashboard' style={styles.navLink}>
               Home
             </Link>
           </li>
