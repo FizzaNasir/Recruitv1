@@ -14,3 +14,8 @@ export { default as SetQuestions } from './pages/Test/SetQuestions'
 export { default as PostJob } from './pages/postJob/PostJob'
 export { default as CompanyRegistration } from './pages/RegisterCompany/RegisterCompany'
 export { default as Registration } from './pages/Registration/Registration'
+export { default as SuccessMsg } from './pages/SuccessMsg/SuccessMsg'
+
+//to be excluded later on
+export { default as Preview } from './components/ImageInput/ImgPreview'
+

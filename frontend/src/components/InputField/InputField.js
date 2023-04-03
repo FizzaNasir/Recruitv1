@@ -3,7 +3,7 @@ export default function InputField(props) {
   const {Variant}= props;
   return (
     <input
-      type='number'
+      type={props.Type}
       style={{ appearance: 'none', '-webkit-appearance': 'none' }}
       required
       maxLength={props.MaxLength}

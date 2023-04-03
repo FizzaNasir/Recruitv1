@@ -17,6 +17,8 @@ import {
   SetQuestions,
   PostJob,
   Registration,
+  Preview,
+  SuccessMsg
 } from './exports';
 
 function App() {
@@ -31,6 +33,10 @@ function App() {
           <Route path="/dashboard" exact element={<DashBoard />} />
           <Route path="/resetPassword/:token" exact element={<SetPwd />} />
           <Route path="/verifyYourEmail" exact element={<EmailOtp />} />
+          <Route path="/Successful_Submission" exact element={<SuccessMsg />} />
+
+          {/* //to be excluded later on */}
+          <Route path="/Preview" exact element={<Preview />} />
           <Route
             path="/enterYourPhoneNbr"
             exact

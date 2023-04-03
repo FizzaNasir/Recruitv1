@@ -9,6 +9,14 @@ const Header = {
 const config = {
   headers: Header,
 };
+const newHeader={
+    'Content-Type': 'multipart/form-data',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+}
+const ImageConfig={
+  headers: newHeader,
+}
 // Sign up
 export const signUp = async (data) => {
   console.log(data);
@@ -76,6 +84,18 @@ export const postJob = async (data) => {
     return err.response.data.message;
   }
 };
+
+//MINEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE 
+export const companyRegistration = async (data) => {
+  try {
+    const res = await axios.post(`${url}company/register`, data, ImageConfig);
+    return 200;
+  } catch (err) {
+    console.log(err);
+    return err.response.data.message;
+  }
+};
+
 
 export const createTest = async (data) => {
   try {

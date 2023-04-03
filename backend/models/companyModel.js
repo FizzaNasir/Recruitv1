@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const CompanySchema = new mongoose.Schema({
   companyname: {
     type: String,
-    required: [true, 'Please enter Company name']
+    required: [true, 'Please enter Company name'],
+    // unique: true
   },
   HeadName: {
     type: String,
@@ -11,23 +12,25 @@ const CompanySchema = new mongoose.Schema({
   },
   Website: {
     type: String,
-    required: [true, 'Please enter company name']
+    required: [true, 'Please enter website'],
+    // unique: true
   },
   Email: {
     type: String,
-    required: [true, 'Please enter company name']
+    required: [true, 'Please enter email'],
+    // unique: true
   },
   Phone: {
-    type: Number,
-    required: [true, 'Please enter company name']
-  },
-  Logo: {
     type: String,
-    required: [true, 'Please enter company name']
+    required: [true, 'Please enter phone']
+  },
+  EstablishedSince: {
+    type: String,
+    required: [true, 'Please fill out this field']
   },
   OrganizationSize: {
-    type: String,
-    required: [true, 'Please enter company name']
+    type: Number,
+    required: [true, 'Please enter Organization Size']
   },
   OrganizationType: {
     type: String,
@@ -36,12 +39,12 @@ const CompanySchema = new mongoose.Schema({
   },
   Description: {
     type: String,
-    required: [true, 'Please provide skills for the job']
+    required: [true, 'Please provide company description']
   },
-  OtherUrls: {
+  url: [Object],
+  Logo: {
     type: String
   }
 });
-
 // Export the model
 module.exports = mongoose.model('Company', CompanySchema);
