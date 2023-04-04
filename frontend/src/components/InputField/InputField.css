@@ -32,3 +32,12 @@ input[type='number']::-webkit-outer-spin-button {
   min-height: 130px;
   max-height: 130px;
 }
+.inputVariantTwo{
+  outline: none;
+  border: none;
+  width: 370px;
+  padding: 15px;
+  background-color: none;
+  margin: 5px 0;
+  font-size: 14px;
+}
