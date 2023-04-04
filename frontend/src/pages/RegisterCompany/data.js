@@ -8,9 +8,15 @@
     },
     {
         Type:'text',
-        Title:'Location', 
-        Name:'loc',
-        ID: "loc"
+        Title:'CEO/Head Name', 
+        Name:'h_name',
+        ID: "hname"
+    },
+    {
+        Type:'text',
+        Title:'Website',
+        Name:'website',
+        ID:'website'
     },
     {
         Type:'email',
@@ -25,5 +31,18 @@
         ID:'phone',
         MaxLength: '11'
     },
+    {
+        Type:'file',
+        Title:'Logo', 
+        Name:'logo',
+        ID: "logo",
+        Variant: "inputVariantTwo"
+    },  
+    {
+        Type:'Number',
+        Title:'Organization size', 
+        Name:'o_size',
+        ID: "O_size"
+    }
 ]
 export default data;

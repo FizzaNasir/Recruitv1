@@ -23,6 +23,8 @@ import {
   JobDescription,
   Quiz,
   CompanyView,
+  Preview,
+  SuccessMsg,
 } from './exports'
 
 function App() {
@@ -38,6 +40,13 @@ function App() {
           <Route path='user/dashboard/*' exact element={<DashBoard />} />
           <Route path='/resetPassword/:token' exact element={<SetPwd />} />
           <Route path='/verifyYourEmail' exact element={<EmailOtp />} />
+          <Route path='/signup' exact element={<Signup />} />
+          <Route path='/login' exact element={<Login />} />
+          <Route path='/resetPwd' exact element={<ResetPwd />} />
+          <Route path='/dashboard' exact element={<DashBoard />} />
+          <Route path='/resetPassword/:token' exact element={<SetPwd />} />
+          <Route path='/verifyYourEmail' exact element={<EmailOtp />} />
+
           <Route
             path='/enterYourPhoneNbr'
             exact
@@ -73,6 +82,8 @@ function App() {
             exact
             element={<CompanyRegistration state />}
           />
+          <Route path='/Successful_Submission' exact element={<SuccessMsg />} />
+          <Route path='/Preview' exact element={<Preview />} />
         </Routes>
       </StyledEngineProvider>
     </>

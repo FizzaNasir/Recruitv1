@@ -20,3 +20,8 @@ export { default as JobDescription } from './pages/JobDescription/JobDescription
 export { default as AboutUs } from './pages/AboutUs/AboutUs'
 export { default as Quiz } from './pages/Quiz/Quiz'
 export { default as CompanyView } from './pages/CompanyView/CompanyView'
+export { default as SuccessMsg } from './pages/SuccessMsg/SuccessMsg'
+
+//to be excluded later on
+export { default as Preview } from './components/ImageInput/ImgPreview'
+
