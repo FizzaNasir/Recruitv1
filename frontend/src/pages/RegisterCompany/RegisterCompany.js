@@ -36,8 +36,8 @@ const RegisterCompany=()=>{
  const [filePreview, setFilePreview] = useState(null);
  const [inputFields, setInputFields] = useState([]); 
  const [addAlert, setaddAlert] = useState(false); 
- const [isNull, setisNull] = useState(false); 
  const [error, setError] = useState(false)
+ const [duplicateUrl, setduplicateUrl] = useState(false)
 
 const handleChange = (event) => {
   setcompData({ ...compData, [event.target.name]: event.target.value })
@@ -82,7 +82,7 @@ const handleDeleteBtn = (event, index)=>{
  };
 
 
- const handleSubmit =async (event) => {
+ const handleSubmit = async (event) => {
    event.preventDefault();
    setcompData({ 
      ...compData, 
@@ -94,7 +94,12 @@ const handleDeleteBtn = (event, index)=>{
     if(inputFields[i].type==='' || inputFields[i].value===''){
       check=true;
      }
- }
+     else {
+      check = false;
+     }
+    }
+    // const unique = Array.from(new Set(inputFields));
+
    if (
     compData.companyName ==='' ||
     compData.headName ==='' ||
@@ -111,13 +116,19 @@ const handleDeleteBtn = (event, index)=>{
     setError(true)
     return
   }
+
+  // else  if (unique.length != inputFields.length){
+  //  setduplicateUrl(prev=>!prev)
+  //  return
+  // }
+  
 else{
    const data = {
     companyname: compData.companyName,
     HeadName: compData.headName,
     Website: compData.website,
     Email:compData.email,
-    Phone:compData.phone,
+    Phone:compData.phone.toString(),
     Logo: file,
     OrganizationSize:compData.orgSize,
     OrganizationType: compData.orgType,
@@ -125,7 +136,8 @@ else{
     EstablishedSince:compData.est_since,
     url:compData.url 
   }
-  
+
+ 
   const response = await companyRegistration(data)
   if (response === 200) {
     console.log("Ok")
@@ -195,6 +207,7 @@ return(
           id="outlined-helperText"
           label="Phone"
           name='phone'
+          type="number"
          value={compData.phone}
          onChange={handleChange}
         />
@@ -211,16 +224,17 @@ return(
               
        <div>
         <TextField
-         className={styles.input}
-         style={{ width: '50%'               
-        }}
-          
-          id="logo"
+        style={{width: "48.5%"}}
+          id="outlined-number"
           label="Logo"
           type="file"
           name='Logo'
-          // value={compData.logo}
           onChange={handleImageChange}
+          InputLabelProps={{
+            shrink: true,
+          }      
+        }
+          
         />
         <br/>
         <br/>
@@ -229,6 +243,7 @@ return(
 
         <div className={styles.row}>
                <TextField
+               style={{marginBottom: "10px"  }}
          className={styles.input}
           id="outlined-helperText"
           label="Established since (e.g.,1996)"
@@ -276,10 +291,14 @@ return(
                 border: '1px solid #ccc',
               }}/> 
 
-      
-        <Typography style={{ marginTop: '30px' }}>Other Urls (e.g facebook, linkedin etc (optional)) <button  type="button" onClick={handleAddClick}>Add <AddLinkIcon /></button> </Typography> 
+
+        <Typography style={{ marginTop: '30px' }}><h3>Other Urls (e.g facebook, linkedin etc (optional))</h3> 
+        <br/><button className={styles.newBtn} type="button" onClick={handleAddClick}>Add <AddLinkIcon /></button> </Typography> 
         
-        {inputFields.map((inputField, index) => (
+
+        <div >
+        {
+        inputFields.map((inputField, index) => (
     <div key={index} className={styles.row}> 
         <TextField
         type="text"
@@ -295,8 +314,9 @@ return(
            style={{ width: '50%' }}             
     >
   
-      <InputLabel htmlFor='links'>Social media</InputLabel>
+      <InputLabel htmlFor='links'  style={{textAlign: "center", marginTop: "15px"}} >Social media</InputLabel>
       <Select
+      style={{marginTop: "15px"}} 
         value={inputField.type} 
         onChange={(event) => handleDropdownChange(event, index)}
         name='type'      
@@ -306,12 +326,14 @@ return(
         <MenuItem value='linkedin'>linkedin</MenuItem>
       </Select>
     </FormControl>
-    <button id={styles.delBtn} onClick={(event)=>handleDeleteBtn(event, index)}>X</button>     
+   
+   <button id={styles.delBtn} className={styles.newBtn}  style={{marginTop: "5px"}}onClick={(event)=>handleDeleteBtn(event, index)}>X</button> 
     </div> 
   ))}
+  </div>
     
   {addAlert && <p style={{color: 'red'}}>*Please fill above field first or delete it</p>}
-      <button type="submit">Submit</button>
+  <div style={{textAlign: "right"}}><button type="submit" id={styles.submitbtn} className={styles.newBtn}>Submit</button></div>
 
      </form>
       {error && (
