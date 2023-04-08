@@ -1,5 +1,6 @@
 import { Route, Routes, Navigate } from 'react-router-dom'
 import { CssBaseline, Grid, StyledEngineProvider } from '@mui/material'
+import { ChakraProvider } from '@chakra-ui/react'
 import {
   Signup,
   Login,
@@ -25,12 +26,15 @@ import {
   CompanyView,
   Preview,
   SuccessMsg,
+  CompanyDashBoard,
+  CompanyReviews
 } from './exports'
 
 function App() {
   return (
     <>
-      <CssBaseline />
+    <CssBaseline />
+    <ChakraProvider>
       <StyledEngineProvider>
         <Routes>
           {/* User Routes */}
@@ -55,6 +59,13 @@ function App() {
           <Route path='/user/:id' exact element={<Profile />} />
 
           <Route path='/verifyYourPhoneNbr' exact element={<PhoneOtp />} />
+
+          {/* company dashboard */}
+          <Route path='company/company_dashboard/*' exact element={<CompanyDashBoard />} />
+          <Route path='company/company_dashboard/postJob' exact element={<PostJob/>} />
+          <Route path='company/company_dashboard/reviews' exact element={<CompanyReviews />} />
+        
+
           <Route path='/register' exact element={<Registration />} />
           <Route path='/contactUs' exact element={<ContactUs />} />
           <Route path='/aboutUs' exact element={<AboutUs />} />
@@ -86,6 +97,7 @@ function App() {
           <Route path='/Preview' exact element={<Preview />} />
         </Routes>
       </StyledEngineProvider>
+      </ChakraProvider>
     </>
   )
 }

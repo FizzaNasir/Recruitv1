@@ -2,12 +2,18 @@ import React from 'react'
 import { Avatar, Badge, Row, Button, Image, Space, Typography } from 'antd'
 import { MailOutlined, BellFilled, UserOutlined } from '@ant-design/icons'
 import RecruuitLogo from '../../assests/recruuitLogo.png'
+import SideBar from '../../components/CompanyDashboard/Sidebar/Sidebar'
 import styles from './DashBoard.module.css'
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
 
-const Header = () => {
+
+const Header = ({drawer}) => {
+
   return (
     <div className={styles.AppHeader}>
+      {drawer && 
+       <SideBar/>}
       <Image width={140} src={RecruuitLogo} />
       <Typography.Title level={3}>Welcome, Talha Tariq!</Typography.Title>
       <Space
@@ -48,7 +54,7 @@ const Header = () => {
         </Link>
 
         <Button type='primary' href='/companies'>
-          Switch to Companies
+        {drawer? "Switch to User": "Switch to Companies"}
         </Button>
       </Space>
     </div>
