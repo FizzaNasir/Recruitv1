@@ -1,5 +1,5 @@
 import { Route, Routes, Navigate } from 'react-router-dom'
-import { CssBaseline, Grid, StyledEngineProvider } from '@mui/material'
+import { CssBaseline, StyledEngineProvider } from '@mui/material'
 import { ChakraProvider } from '@chakra-ui/react'
 import {
   Signup,
@@ -56,7 +56,7 @@ function App() {
             exact
             element={<PhoneNbrVerify state />}
           />
-          <Route path='/user/:id' exact element={<Profile />} />
+          <Route path='/user/:id' exact element={<Profile/>} />
 
           <Route path='/verifyYourPhoneNbr' exact element={<PhoneOtp />} />
 

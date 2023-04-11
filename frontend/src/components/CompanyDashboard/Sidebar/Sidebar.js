@@ -10,8 +10,7 @@ MenuButton,
 IconButton,
 } from '@chakra-ui/react'
 import {
-HamburgerIcon,
-EmailIcon
+HamburgerIcon
 } from '@chakra-ui/icons'
 
 
@@ -47,7 +46,7 @@ function SideBar() {
         <DrawerContent>
           <DrawerHeader borderBottomWidth='1px'><Image width={140} src={RecruuitLogo} /></DrawerHeader>
           <DrawerBody>
-            {/* <Cards text="Dashboard" icon={<AreaChartOutlined/>} buttonClick={()=>handleButtonClick('dashboard')} /> */}
+            <Cards text="Dashboard" icon={<AreaChartOutlined/>} buttonClick={()=>navigate('/company/company_dashboard')} />
             <Cards text="Post a Job" icon={<BusinessCenterIcon/>} buttonClick={()=>handleButtonClick('postJob')} />
             <Cards text="Reviews" icon={<ReviewsIcon/>} buttonClick={()=>handleButtonClick('reviews')}/>
           </DrawerBody>

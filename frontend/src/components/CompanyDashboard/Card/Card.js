@@ -1,9 +1,4 @@
 import {
-    HamburgerIcon,
-    EmailIcon
-    } from '@chakra-ui/icons'
-
-    import {
         IconButton,
         } from '@chakra-ui/react'
 const Cards=({text, icon, buttonClick})=>{
