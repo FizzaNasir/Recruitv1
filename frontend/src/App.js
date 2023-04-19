@@ -61,7 +61,7 @@ function App() {
           <Route path='/verifyYourPhoneNbr' exact element={<PhoneOtp />} />
 
           {/* company dashboard */}
-          <Route path='company/company_dashboard/*' exact element={<CompanyDashBoard />} />
+          <Route path='company/company_dashboard' exact element={<CompanyDashBoard />} />
           <Route path='company/company_dashboard/postJob' exact element={<PostJob/>} />
           <Route path='company/company_dashboard/reviews' exact element={<CompanyReviews />} />
         

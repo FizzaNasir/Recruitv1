@@ -10,6 +10,7 @@ import StarIcon from '@mui/icons-material/Star';
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import PeopleAltSharpIcon from '@mui/icons-material/PeopleAltSharp';
 const CompanyDashBoard = () => {
 
   return (
@@ -17,8 +18,8 @@ const CompanyDashBoard = () => {
       <Header drawer={true}/>
       <div style={{ display: 'flex', flexDirection: 'column' , backgroundColor: '#E6F0F1',  height: '100vh'}}>
       <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center' , marginTop: '20px'}}>
-        <StatsCard text="Followers" stats={24} icon={<TeamOutlined/>}/>
-        <StatsCard text="Page Visitors" stats={24} icon={<TeamOutlined/>}/>
+        <StatsCard text="Followers" stats={24} icon={<PeopleAltSharpIcon/>}/>
+        <StatsCard text="Page Visitors" stats={24} icon={<PeopleAltSharpIcon/>}/>
         <StatsCard text="Rating" stats={24} icon={<StarIcon/>}/>
         <StatsCard text="Jobs posted" stats={24} icon={<BusinessCenterIcon/>}/>
         <StatsCard text="No of clicks" stats={24} icon={<RocketLaunchIcon/>}/>

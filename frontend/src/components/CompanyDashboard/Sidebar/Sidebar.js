@@ -37,8 +37,9 @@ function SideBar() {
   <MenuButton
     as={IconButton}
     aria-label='Options'
-    icon={<HamburgerIcon colorscheme='black'/>}
-    variant='outline'
+    icon={<HamburgerIcon/>}
+    color={'whiteAlpha.100000'}
+    colorScheme='blue'
     onClick={onOpen}
   />
       <Drawer placement='left' onClose={onClose} isOpen={isOpen}>
