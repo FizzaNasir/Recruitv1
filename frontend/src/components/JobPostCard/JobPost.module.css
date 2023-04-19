@@ -1,5 +1,8 @@
 .jobs_container{
     background-color:#FDFEFF;
+    width: 700px;
+    /* height: 500px; */
+    margin-bottom: 20px;
 }
 
 .jobs_wrapper {

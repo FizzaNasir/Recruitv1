@@ -5,7 +5,7 @@ import CallIcon from '@mui/icons-material/Call';
 import CompDescText from './Comp_desc_text'
 import MarkunreadIcon from '@mui/icons-material/Markunread';
 import GroupsIcon from '@mui/icons-material/Groups';
-
+import BusinessIcon from '@mui/icons-material/Business';
 import styles from './Card.module.css';
 import {Grid} from '@mui/material'
 import {Item} from '@emotion/styled'
@@ -21,12 +21,12 @@ export default function CompanyDescription(){
   <CardBody>
   
   <div className={styles.gridContainer}>
-    <CompDescText heading="Company: " icon={<ApartmentIcon/>} value="Devsinc"/>
+    <CompDescText heading="Company: " icon={<BusinessIcon/>} value="Devsinc"/>
     <CompDescText heading="CEO: " icon={<AccountCircleIcon/>} value="Fizza Nasir"/>
     <CompDescText heading="Phone: " icon={<CallIcon/>} value="0426382922"/>
     <CompDescText heading="Email: " icon={<MarkunreadIcon/>} value="hr@devsinc.com"/>
     <CompDescText heading="Organization Size: " icon={<GroupsIcon/>} value="23"/>
-    <CompDescText heading="Organization Type: " icon={<GroupsIcon/>} value="Private"/>
+    <CompDescText heading="Organization Type: " icon={<ApartmentIcon/>} value="Private"/>
     </div>
   </CardBody>
 </Card>
