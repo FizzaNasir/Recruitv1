@@ -73,6 +73,7 @@ exports.createCompany = catchAsync(async (req, res, next) => {
     url,
     Logo
   });
+
   try {
     res.status(201).json({
       status: 'success',
