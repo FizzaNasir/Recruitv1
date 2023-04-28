@@ -15,9 +15,6 @@ const company = require('../models/companyModel');
  *
  */
 exports.createCompany = catchAsync(async (req, res, next) => {
-  // console.log(req.body);
-  // Data validation on Server Side
-  // const NewUrl = `${req.protocol}://${req.get('host')}`
   const {
     companyname,
     HeadName,
@@ -27,20 +24,11 @@ exports.createCompany = catchAsync(async (req, res, next) => {
     OrganizationSize,
     OrganizationType,
     Description,
-    // eslint-disable-next-line camelcase
     EstablishedSince,
     url
   } = req.body;
-  // const Logo= `${NewUrl}/public/${req.file.filename}`
+
   const Logo= `backend/images/${req.file.filename}`
-
-
-  // eslint-disable-next-line prettier/prettier
-  // const Logo=req.file.path;
-  // useEffect(()=>{
-  //   console.log(req.file.path)
-  //   // console.log(inputFields)
-  // })
   
   if (
     !companyname ||
@@ -56,10 +44,7 @@ exports.createCompany = catchAsync(async (req, res, next) => {
   {
     return next(new AppError('Please provide all the fields', 400));
   }
-  //  data maybe can include or not these fields : salaryRange
-  // if (url.length === 0) {
-  //   // no social meadia url provided;
-  // }
+ 
   const newCompany = await company.create({
     companyname,
     HeadName,
@@ -73,7 +58,6 @@ exports.createCompany = catchAsync(async (req, res, next) => {
     url,
     Logo
   });
-
   try {
     res.status(201).json({
       status: 'success',
@@ -89,3 +73,16 @@ exports.createCompany = catchAsync(async (req, res, next) => {
     });
   }
 });
+
+exports.getCompany = catchAsync(async(req,res,next)=>{
+const company = await company.findById(req.params.id)
+if (!company) {
+  return next(new AppError('No company found with that ID', 404));
+}
+res.status(200).json({
+  status:'json',
+  data:{
+    company
+  }
+})
+})
