@@ -7,15 +7,17 @@ import MarkunreadIcon from '@mui/icons-material/Markunread';
 import GroupsIcon from '@mui/icons-material/Groups';
 import BusinessIcon from '@mui/icons-material/Business';
 import styles from './Card.module.css';
-import {Grid} from '@mui/material'
-import {Item} from '@emotion/styled'
+import FacebookIcon from '@mui/icons-material/Facebook';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+
 export default function CompanyDescription(){
 
     return(
         <div>
         <Card align='left' style={{ boxShadow: "2px  3px 5px gray"}}>
   <CardHeader>
-    <Heading size='md'>Company Details</Heading>
+    <Heading size='md' marginBottom='0px'>Company Details</Heading>
   </CardHeader>
 
   <CardBody>
@@ -27,6 +29,9 @@ export default function CompanyDescription(){
     <CompDescText heading="Email: " icon={<MarkunreadIcon/>} value="hr@devsinc.com"/>
     <CompDescText heading="Organization Size: " icon={<GroupsIcon/>} value="23"/>
     <CompDescText heading="Organization Type: " icon={<ApartmentIcon/>} value="Private"/>
+    <CompDescText heading="Facebook: " icon={<FacebookIcon/>} value="www.facebook.com/FizzaNasir"/>
+    <CompDescText heading="Instagram: " icon={<InstagramIcon/>} value="www.instagram.com/FizzaNasir"/>
+    <CompDescText heading="Linkedin: " icon={<LinkedInIcon/>} value="www.linkedin.com/Fizza_Nasir"/>
     </div>
   </CardBody>
 </Card>

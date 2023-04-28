@@ -96,6 +96,16 @@ export const companyRegistration = async (data) => {
   }
 };
 
+export const getCompanyInfo = async(data) =>{
+try {
+  const res = await axios.get(`${url}company/company_dashboard`);
+  return 200;
+  
+} catch (error) {
+  console.log(error);
+  return error.response.data.message;
+}
+}
 
 export const createTest = async (data) => {
   try {
