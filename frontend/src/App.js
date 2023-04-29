@@ -1,20 +1,19 @@
 import { Route, Routes, Navigate } from 'react-router-dom'
 import { BrowserRouter } from 'react-router-dom'
+import './App.css'
 
 import { CssBaseline, StyledEngineProvider } from '@mui/material'
 import { ChakraProvider } from '@chakra-ui/react'
 import {
   Signup,
   Login,
-  ResetPwd,
-  SetPwd,
+  ForgotPassword,
+  ResetPassword,
   Profile,
-  ErrorPage,
+  PageNotFound,
   DashBoard,
   EmailOtp,
   PhoneNbrVerify,
-  ContactUs,
-  AboutUs,
   PhoneOtp,
   CompanyRegistration,
   CreateTest,
@@ -32,6 +31,7 @@ import {
   CompanyReviews,
   LandingPage,
 } from './exports'
+import ForgetPassword from './pages/ForgetPassword/ForgetPassword'
 
 function App() {
   return (
@@ -40,20 +40,22 @@ function App() {
       <ChakraProvider>
         <StyledEngineProvider>
           <Routes>
-            {/* User Routes */}
+            {/* Authentication */}
             <Route path='/' exact element={<LandingPage />} />
             <Route path='/signup' exact element={<Signup />} />
             <Route path='/login' exact element={<Login />} />
-            <Route path='/resetPwd' exact element={<ResetPwd />} />
+            <Route path='/verifyYourEmail' exact element={<EmailOtp />} />
+            <Route path='/forgetPassword' exact element={<ForgetPassword />} />
+            <Route
+              path='/resetPassword/:token'
+              exact
+              element={<ResetPassword />}
+            />
+
+            {/* User Routes */}
             <Route path='user/dashboard/*' exact element={<DashBoard />} />
-            <Route path='/resetPassword/:token' exact element={<SetPwd />} />
-            <Route path='/verifyYourEmail' exact element={<EmailOtp />} />
-            <Route path='/signup' exact element={<Signup />} />
-            <Route path='/login' exact element={<Login />} />
-            <Route path='/resetPwd' exact element={<ResetPwd />} />
+
             <Route path='/dashboard' exact element={<DashBoard />} />
-            <Route path='/resetPassword/:token' exact element={<SetPwd />} />
-            <Route path='/verifyYourEmail' exact element={<EmailOtp />} />
 
             <Route
               path='/enterYourPhoneNbr'
@@ -82,8 +84,6 @@ function App() {
             />
 
             <Route path='/register' exact element={<Registration />} />
-            <Route path='/contactUs' exact element={<ContactUs />} />
-            <Route path='/aboutUs' exact element={<AboutUs />} />
 
             <Route path='/test/createTest' exact element={<CreateTest />} />
             <Route
@@ -106,7 +106,7 @@ function App() {
 
             <Route path='/home' exact element={<Home />} />
             <Route path='/' exact element={<Navigate replace to='/login' />} />
-            <Route path='*' exact element={<ErrorPage />} />
+            <Route path='*' exact element={<PageNotFound />} />
             <Route
               path='/register_company'
               exact

@@ -8,25 +8,27 @@ const Header = {
 }
 const config = {
   headers: Header,
-};
-const newHeader={
-    'Content-Type': 'multipart/form-data',
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
 }
-const ImageConfig={
+const newHeader = {
+  'Content-Type': 'multipart/form-data',
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+}
+const ImageConfig = {
   headers: newHeader,
 }
-// Sign up
+
+/*
+  User Authentication & Authorization
+*/
 export const signUp = async (data) => {
   console.log(data)
   try {
     const res = await axios.post(`${url}users/signup`, data, config)
-    console.log(res.status)
-    return res
+    return res.data
   } catch (err) {
     console.log(err + 'here')
-    return err.response.data.message
+    return err.response.data
   }
 }
 
@@ -35,8 +37,17 @@ export const login = async (data) => {
     const res = await axios.post(`${url}users/login`, data, config)
     return res.data
   } catch (err) {
+    return err.response.data
+  }
+}
+
+export const verifyEmail = async (data) => {
+  try {
+    const res = await axios.post(`${url}users/verifyEmail`, data, config)
+    return res.data
+  } catch (err) {
     console.log(err)
-    return false
+    return err.response.data
   }
 }
 
@@ -44,10 +55,9 @@ export const forgotPassword = async (data) => {
   let res
   try {
     res = await axios.post(`${url}users/forgotPassword`, data, config)
-    return 200
+    return res.data
   } catch (err) {
-    console.log(err.response.data.message)
-    return err.response.data.message
+    return err.response.data
   }
 }
 
@@ -58,62 +68,52 @@ export const resetPassword = async (token, data) => {
       data,
       config
     )
-    return 200
+    return res.data
   } catch (err) {
     console.log(err)
-    return err.response.data.message
-  }
-}
 
-export const verifyEmail = async (data) => {
-  try {
-    const res = await axios.post(`${url}users/verifyEmail`, data, config)
-    return 200
-  } catch (err) {
-    console.log(err)
-    return err.response.data.message
+    return err.response.data
   }
 }
 
 export const postJob = async (data) => {
   try {
     const res = await axios.post(`${url}jobs/createJob`, data, config)
-    return 200
+    return res.data
   } catch (err) {
     console.log(err)
-    return err.response.data.message
+    return err.response.data
   }
 }
 
-//MINEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE 
+//MINEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
 export const companyRegistration = async (data) => {
   try {
-    const res = await axios.post(`${url}company/register`, data, ImageConfig);
-    return 200;
+    const res = await axios.post(`${url}company/register`, data, ImageConfig)
+    return res.data
   } catch (err) {
-    console.log(err);
-    return err.response.data.message;
+    console.log(err)
+    return err.response.data
   }
-};
-
-export const getCompanyInfo = async(data) =>{
-try {
-  const res = await axios.get(`${url}company/company_dashboard`);
-  return 200;
-  
-} catch (error) {
-  console.log(error);
-  return error.response.data.message;
 }
+
+export const getCompanyInfo = async (data) => {
+  try {
+    const res = await axios.get(`${url}company/company_dashboard`)
+    return res.data
+  } catch (error) {
+    console.log(error)
+    return error.response.data.message
+  }
 }
 
 export const createTest = async (data) => {
   try {
     const res = await axios.post(`${url}tests/createTest`, data, config)
-    return 200
+    return res.data
   } catch (err) {
     console.log(err)
-    return err.response.data.message
+    return err.response.data
   }
 }
 // register a new user
@@ -124,10 +124,10 @@ export const register = async (data) => {
   try {
     console.log(data)
     const res = await axios.post(`${url}users/register`, data, config)
-    return 200
+    return res.data
   } catch (err) {
     console.log(err)
-    return err.response.data.message
+    return err.response.data
   }
 }
 

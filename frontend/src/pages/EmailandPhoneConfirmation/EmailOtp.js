@@ -1,115 +1,165 @@
-import InputField from '../../components/InputField/InputField'
 import styles from './styles.module.css'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router'
-import Header from '../../components/Header/Header'
-import { verifyEmail } from '../../util/api-call'
-import Button from '../../components/Button/Button'
+import { Col, Row, message } from 'antd'
+import { Form, Button, Input } from 'antd'
+import SideBox from '../Generic/SideBox'
 // State for storing the otp digits
 const EmailOtp = () => {
-  const [otpDigits, setotpDigits] = useState({
-    Digit_1: '',
-    Digit_2: '',
-    Digit_3: '',
-    Digit_4: '',
-  })
+  const [messageApi, contextHolder] = message.useMessage()
 
   const [error, setError] = useState('') // State for storing the error message
   const navigate = useNavigate()
 
-  const { Digit_1, Digit_2, Digit_3, Digit_4 } = otpDigits // digits
-
-  // Handle change function for the input fields
-  function handleChange(e) {
-    const { name, value } = e.target
-
-    setotpDigits((prevdata) => ({
-      ...prevdata,
-      [name]: value,
-    }))
-
-    // move to next input field after checking condtions
-    if (e.target.dataset.next && value.length === 1) {
-      document.getElementById(e.target.dataset.next).focus()
-    }
-  }
+  const [form] = Form.useForm()
 
   // function for handling the submit button
   async function handleSubmit(e) {
-    e.preventDefault()
     // if all the fields are filled then take otp from local storage
-    const otp = localStorage.getItem('otp')
-    // construct the otp from the state
-    const otpFromState = Digit_1 + Digit_2 + Digit_3 + Digit_4
-    // check if the otp from state is equal to the otp from local storage
-    if (otp === otpFromState) {
-      // if the otp is correct then update the DB & move to next page
-      const email = localStorage.getItem('email')
-      const data = { email, verifyEmail: true }
-      // make a post request to the server
-      await verifyEmail(data)
-      navigate('/enterYourPhoneNbr')
+    let otp = localStorage.getItem('otp')
+    // get the otp from the form
+    const { digit1, digit2, digit3, digit4 } = form.getFieldsValue()
+    // combine all the digits
+    const otpValue = digit1 + digit2 + digit3 + digit4
+    otp = localStorage.getItem('otp')
+    if (otp === otpValue) {
+      //  await verifyEmail(data)
+      messageApi.success('Email Verified')
+
+      // navigate to the next page after 1 sec
+      setTimeout(() => {
+        navigate('/login')
+      }, 1000)
     } else {
-      setError('Incorrect OTP')
+      messageApi.error('Invalid OTP')
     }
   }
 
   return (
     <>
-      <Header />
-      <div className={styles.centered}>
-        <div className={styles.prompt}>
-          <>OTP has been sent to your email. Enter here for verification</>
-        </div>
-        <div className={styles.digitgroup}>
-          <div>
-            <InputField
-              Value={Digit_1}
-              Id='Digit-1'
-              Name='Digit_1'
-              DataNext='Digit-2'
-              handleChangestate={handleChange}
-              MaxLength='1'
-              Variant='inputVariantOne'
-            />
-            <InputField
-              Value={Digit_2}
-              Id='Digit-2'
-              Name='Digit_2'
-              DataNext='Digit-3'
-              DataPrevious='Digit-1'
-              handleChangestate={handleChange}
-              MaxLength='1'
-              Variant='inputVariantOne'
-            />
-            <InputField
-              Value={Digit_3}
-              Id='Digit-3'
-              Name='Digit_3'
-              DataNext='Digit-4'
-              DataPrevious='Digit-2'
-              handleChangestate={handleChange}
-              MaxLength='1'
-              Variant='inputVariantOne'
-            />
-            <InputField
-              Value={Digit_4}
-              Id='Digit-4'
-              Name='Digit_4'
-              DataPrevious='Digit-3'
-              handleChangestate={handleChange}
-              MaxLength='1'
-              Variant='inputVariantOne'
-            />
-          </div>
-          <Button
-            Type='submit'
-            Variant='btnVariantTwo'
-            HandleClick={handleSubmit}
-            Title='Send'
+      {contextHolder}
+      <div className='flex flex-wrap' style={{ height: '100vh' }}>
+        <div className='hidden md:block md:w-6/12'>
+          <SideBox
+            image='Group 614.png'
+            width='320px'
+            imageClass={'w-5/12 mt-48 mb-12'}
           />
         </div>
-        {error && <div className={styles.error_msg}>{error}</div>}
+
+        <div className='w-full md:w-6/12 flex justify-center mt-100'>
+          <div className='w-full lg:w-10/12 2xl:w-8/12'>
+            <div className='ps-4 pe-4 mt-1'>
+              <div className='form_top_content'>
+                <div className='justify-center'>
+                  <h1 className='text-2xl font-bold text-center mt-56'>
+                    Verify your email
+                  </h1>
+                  <p className='text-center text-base text-gray-600  mt-4'>
+                    We have sent a 4-digit code to your email address. Please
+                    enter the code in the box below to verify your email
+                    address.
+                  </p>
+                </div>
+                <div className='mt-8'>
+                  <div>
+                    <Form form={form} onFinish={handleSubmit}>
+                      <Row
+                        justify='space-between'
+                        span={24}
+                        gutter={[16, 16]}
+                        style={{ width: '45%', margin: 'auto' }}
+                      >
+                        <Col span={6}>
+                          <Form.Item
+                            name='digit1'
+                            style={{ width: '100%', height: '20px' }}
+                            rules={[
+                              {
+                                required: true,
+                                maxLength: 1,
+                                message: 'Please input your digit!',
+                              },
+                            ]}
+                          >
+                            <Input
+                              maxLength={1}
+                              style={{ textAlign: 'center' }}
+                            />
+                          </Form.Item>
+                        </Col>
+                        <Col span={6}>
+                          <Form.Item
+                            name='digit2'
+                            style={{ width: '100%', height: '20px' }}
+                            rules={[
+                              {
+                                required: true,
+                                maxLength: 1,
+                                message: 'Please input your digit!',
+                              },
+                            ]}
+                          >
+                            <Input />
+                          </Form.Item>
+                        </Col>
+                        <Col span={6}>
+                          <Form.Item
+                            name='digit3'
+                            style={{ width: '100%', height: '20px' }}
+                            rules={[
+                              {
+                                required: true,
+                                maxLength: 1,
+                                message: 'Please input your digit!',
+                              },
+                            ]}
+                          >
+                            <Input />
+                          </Form.Item>
+                        </Col>
+                        <Col span={6}>
+                          <Form.Item
+                            name='digit4'
+                            style={{ width: '100%', height: '20px' }}
+                            rules={[
+                              {
+                                required: true,
+                                maxLength: 1,
+                                message: 'Please input your digit!',
+                              },
+                            ]}
+                          >
+                            <Input />
+                          </Form.Item>
+                        </Col>
+                      </Row>
+                      <div className='mt-8'>
+                        <Button
+                          type='primary'
+                          htmlType='submit'
+                          className='w-full'
+                        >
+                          Verify
+                        </Button>
+                      </div>
+                    </Form>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className='move_signup text-center mt-5'>
+              <p>
+                Incorrect Email?
+                <Link to='/signup' className='ms-2 inline_link'>
+                  SignUp again
+                </Link>
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   )

@@ -1,121 +1,250 @@
-import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import styles from './SignUp.module.css'
-import Header from '../../components/Header/Header'
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import SideBox from '../Generic/SideBox'
+import { Col, Input, Radio, Row, Select, Upload } from 'antd'
+import './../Generic/credForm.css'
+import { Link } from 'react-router-dom'
+import { Form, Button, message } from 'antd'
 import { signUp } from '../../util/api-call'
-import { EmailOtp } from '../EmailandPhoneConfirmation/EmailOtp'
+import { PlusOutlined, LoadingOutlined } from '@ant-design/icons'
+import ImgCrop from 'antd-img-crop'
 
-const Signup = () => {
-  const [data, setData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    passwordConfirm: '',
-  })
-  const [error, setError] = useState('')
+const { Option } = Select
+const SignUp = () => {
   const navigate = useNavigate()
+  const [messageApi, contextHolder] = message.useMessage()
+  const [loading, setLoading] = useState(false)
+  const [fileList, setFileList] = useState([])
 
-  const handleChange = ({ currentTarget: input }) => {
-    setData({ ...data, [input.name]: input.value })
+  // Image Uploading via Model Logic
+  const onImgChange = ({ fileList: newFileList }) => {
+    setFileList(newFileList)
+  }
+  const onPreview = async (file) => {
+    let src = file.url
+    if (!src) {
+      src = await new Promise((resolve) => {
+        const reader = new FileReader()
+        reader.readAsDataURL(file.originFileObj)
+        reader.onload = () => resolve(reader.result)
+      })
+    }
+    const image = new Image()
+    image.src = src
+    const imgWindow = window.open(src)
+    imgWindow?.document.write(image.outerHTML)
+  }
+  const [form] = Form.useForm()
+
+  const validatePasswordLength = (_, value) => {
+    if (value && value.length < 8) {
+      return Promise.reject('Password must be at least 8 characters')
+    }
+    return Promise.resolve()
   }
 
-  const handleSubmit = async (e) => {
-    // Make a post request to the server
-    // If the user is successfully created, redirect to the login page
-    // If the user is not created, display the error message
+  const onFinish = async (values) => {
+    // if image is not uploaded
+    if (!fileList[0]) {
+      console.log('img errr')
+      return messageApi.open({
+        type: 'error',
+        content: 'Please select an image',
+      })
+    }
+    values.photo = fileList[0].originFileObj
 
-    e.preventDefault()
-    const { name, email, password, passwordConfirm } = data
-    // check if email provided is valid
-    if (
-      !email ||
-      !name ||
-      !password ||
-      !passwordConfirm ||
-      !email.includes('@')
-    ) {
-      setError('Please fill all fields with valid email')
-      return
+    const res = await signUp(values)
+    console.log(res)
+    if (res.status === 'success') {
+      messageApi.open({
+        type: 'success',
+        content: 'You have signed up successfully!',
+      })
+      console.log(res)
+      localStorage.setItem('otp', res.data.otp)
+      form.resetFields()
+      setTimeout(() => {
+        navigate('/verifyEmail')
+      }, 1000)
+    } else if (res.status === 'fail') {
+      messageApi.open({
+        type: 'error',
+        content: res.message,
+      })
     }
-
-    if (password !== passwordConfirm) {
-      setError('Passwords do not match')
-      return
-    }
-    const res = await signUp({ name, email, password, passwordConfirm })
-    if (res?.status === 201) {
-      const otp = res.data.data.otp
-      localStorage.setItem('otp', otp)
-      localStorage.setItem('email', email)
-      navigate('/verifyYourEmail')
-    }
-    setError('Email already exists or Server error')
+  }
+  const onFinishFailed = (errorInfo) => {
+    console.log('Failed:', errorInfo)
   }
 
   return (
-    <div>
-      <div className={styles.main_container}>
-        <Header />
-      </div>
-      <div className={styles.signup_container}>
-        <div className={styles.signup_form_container}>
-          <div className={styles.left}>
-            <h1>Welcome Back</h1>
-            <Link to='/login'>
-              <button type='button' className={styles.white_btn}>
-                Sign in
-              </button>
-            </Link>
-          </div>
-          <div className={styles.right}>
-            <form className={styles.form_container} onSubmit={handleSubmit}>
-              <h1>Create Account</h1>
-              <input
-                type='name'
-                placeholder='Name'
-                name='name'
-                onChange={handleChange}
-                value={data.name}
-                required
-                className={styles.input}
-              />
-              <input
-                type='email'
-                placeholder='Email'
-                name='email'
-                onChange={handleChange}
-                value={data.email}
-                required
-                className={styles.input}
-              />
-              <input
-                type='password'
-                placeholder='Password'
-                name='password'
-                onChange={handleChange}
-                value={data.password}
-                required
-                className={styles.input}
-              />
-              <input
-                type='password'
-                placeholder='Confirm Password'
-                name='passwordConfirm'
-                onChange={handleChange}
-                value={data.passwordConfirm}
-                required
-                className={styles.input}
-              />
-              {error && <div className={styles.error_msg}>{error}</div>}
-              <button type='submit' className={styles.green_btn}>
-                Sign Up
-              </button>
-            </form>
+    <>
+      {contextHolder}
+
+      <div className='flex flex-wrap' style={{ height: '100vh' }}>
+        <div className='hidden md:block md:w-6/12'>
+          <SideBox
+            image='Group 614.png'
+            width='320px'
+            imageClass={'w-5/12 mt-48  mb-12'}
+          />
+        </div>
+
+        <div className='w-full md:w-6/12 flex justify-center'>
+          <div className='w-full lg:w-10/12 2xl:w-8/12'>
+            <div className='ps-4 pe-4 mt-1'>
+              <div className='form_top_content'>
+                <div className='justify-center'>
+                  <h1 className='text-3xl font-medium text-center mt-32'>
+                    Create Your Account
+                  </h1>
+                  <p className='text-center'>
+                    Please provide all the required information.
+                  </p>
+                </div>
+
+                <div className='mt-10 signup-form-fields pe-4'>
+                  <Form
+                    form={form}
+                    name='basic'
+                    initialValues={{ remember: true }}
+                    onFinish={onFinish}
+                    onFinishFailed={onFinishFailed}
+                    layout='vertical'
+                    autoComplete='on'
+                  >
+                    <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
+                      <ImgCrop rotate>
+                        <Upload
+                          listType='picture-card'
+                          fileList={fileList}
+                          onChange={onImgChange}
+                          onPreview={onPreview}
+                          beforeUpload={() => false}
+                        >
+                          {fileList.length < 1 && '+ Profile'}
+                        </Upload>
+                      </ImgCrop>
+                    </div>
+
+                    <Row gutter={[16, 16]}>
+                      <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+                        <Form.Item
+                          label='Name'
+                          name='name'
+                          rules={[
+                            {
+                              required: true,
+                              message: 'Please input your first name!',
+                            },
+                          ]}
+                        >
+                          <Input />
+                        </Form.Item>
+                      </Col>
+                      <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+                        <Form.Item
+                          label='Email'
+                          name='email'
+                          rules={[
+                            {
+                              required: true,
+                              message: 'Please input your email!',
+                            },
+                            {
+                              type: 'email',
+                              message: 'Please enter a valid email!',
+                            },
+                          ]}
+                        >
+                          <Input />
+                        </Form.Item>
+                      </Col>
+                    </Row>
+
+                    <Row gutter={[16, 16]}>
+                      <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+                        <Form.Item
+                          label='Password'
+                          name='password'
+                          rules={[
+                            {
+                              required: true,
+                              message: 'Please input your password!',
+                            },
+                            {
+                              validator: validatePasswordLength,
+                            },
+                          ]}
+                        >
+                          <Input.Password />
+                        </Form.Item>
+                      </Col>
+                      <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+                        <Form.Item
+                          label='Confirm Password'
+                          name='passwordConfirm'
+                          dependencies={['password']}
+                          rules={[
+                            {
+                              required: true,
+                              message: 'Please confirm your password!',
+                            },
+                            ({ getFieldValue }) => ({
+                              validator(_, value) {
+                                if (
+                                  !value ||
+                                  getFieldValue('password') === value
+                                ) {
+                                  return Promise.resolve()
+                                }
+                                return Promise.reject(
+                                  'The two passwords that you entered do not match!'
+                                )
+                              },
+                            }),
+                          ]}
+                        >
+                          <Input.Password />
+                        </Form.Item>
+                      </Col>
+                    </Row>
+
+                    <Form.Item>
+                      <Button
+                        style={{ height: '2.5rem' }}
+                        size='small'
+                        className='btn create_account_btn w-100'
+                        htmlType='submit'
+                      >
+                        Signup
+                      </Button>
+                    </Form.Item>
+                  </Form>
+                </div>
+              </div>
+            </div>
+
+            <div className='move_login text-center'>
+              <p>
+                Already have an account?
+                <Link to='/login' className='ms-2 inline_link'>
+                  Login
+                </Link>
+              </p>
+              {/* <p>
+                Create Organization account?
+                <Link to='/signup/org' className='ms-2 inline_link'>
+                  Create account
+                </Link>
+              </p> */}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 
-export default Signup
+export default SignUp

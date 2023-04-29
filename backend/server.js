@@ -1,5 +1,4 @@
-const dotenv = require('dotenv').config();
-
+const dotenv = require('dotenv')
 process.on('uncaughtException', err => {
   console.log('UNCAUGHT EXCEPTION! 💥 Shutting down...');
   console.log(err.stack);

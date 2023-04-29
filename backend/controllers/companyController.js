@@ -1,4 +1,4 @@
-/* eslint-disable prettier/prettier */
+/* eslint-disable prettier/prett  ier */
 /* eslint-disable camelcase */
 // const { useEffect } = require('react');
 const catchAsync = require('../utils/catchAsync');

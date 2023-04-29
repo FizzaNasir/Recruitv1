@@ -22,12 +22,18 @@ const signToken = id => {
  * This function is used to create a new user
  */
 exports.signUp = catchAsync(async (req, res, next) => {
+  // check if user is already registered
+  const user = User.findOne({ email: req.body.email });
+  if (user) {
+    return next(new AppError('User already exists', 400));
+  }
   // check if the data is valid
   const { name, email, password, passwordConfirm } = req.body;
   if (!name || !email || !password || !passwordConfirm) {
     return next(new AppError('Please provide all the fields', 400));
   }
 	
+
 
   // Create a new user in the database using the data from the request body
   const newUser = await User.create({
@@ -36,6 +42,7 @@ exports.signUp = catchAsync(async (req, res, next) => {
     password,
     passwordConfirm
   });
+
 
   // Sign the token and send it to the client
   const token = signToken(newUser._id);
