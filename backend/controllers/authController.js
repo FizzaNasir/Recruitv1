@@ -27,14 +27,7 @@ exports.signUp = catchAsync(async (req, res, next) => {
   if (!name || !email || !password || !passwordConfirm) {
     return next(new AppError('Please provide all the fields', 400));
   }
-
-  // Check if the user already exists
-  const user = await User.findOne({
-    email: req.body.email
-  });
-  if (user) {
-    return next(new AppError('User already exists', 400));
-  }
+	
 
   // Create a new user in the database using the data from the request body
   const newUser = await User.create({
